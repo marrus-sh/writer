@@ -1,293 +1,309 @@
 <!DOCTYPE html>
+<html>
+	<head>
+		<!--  Metadata content  -->
+		<title>KibiWriter</title>
+		<meta charset="utf-8">
 
-<!--  Metadata content  -->
-<title>KibiWriter</title>
-<meta charset="utf-8">
+		<!--  Core styling  -->
+		<style type="text/css">
+/*  Application  */
+body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: .5em;
+	right: .5em;
+	margin: auto;
+	padding: 2.725em 0 6.25em;
+	width: auto;
+	max-width: 31em;
+	height: auto;
+	line-height: 1.35;
+	font-synthesis: none;
+}
 
-<!--  Core styling  -->
-<style type="text/css">
+/*  Topbar  */
+*[role="menubar"] {
+	display: block;
+	position: absolute;
+	top: .675em;
+	left: 0;
+	margin: 0;
+	border: none;
+	border-radius: 1ex 1ex 0 0;
+	padding: 0;
+	width: auto;
+	height: 1.35em;
+	overflow: hidden;
+}
+*[role="menubar"] *[role="group"] { display: inline-block }
+*[role="menubar"] *.menu-item {
+	display: inline-block;
+	margin: 0;
+	border: none;
+	padding: 0;
+	width: 2rem;
+	height: 1.35rem;
+	color: inherit;
+	background: none;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: bold;
+	line-height: 1.35rem;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	cursor: pointer;
+}
+*[role="menubar"] *.menu-item + *.menu-item { border-left: thin currentColor solid }
+*[role="menubar"] hr {
+	display: inline-block;
+	box-sizing: content-box;
+	margin: 0;
+	border-width: 0px thin;
+	border-color: currentColor;
+	border-style: none solid;
+	padding: 0;
+	color: inherit;
+	background: none;
+	width: 2px;
+	height: 1.35rem;
+	vertical-align: top;
+}
+#font-menu *.menu-item::after { content: "A" }
+#io-menu *.menu-item[title="Upload"]::after { content: "⬆" }
+#io-menu *.menu-item[title="Download"]::after { content: "⬇" }
 
-	/*  Application  */
-	body {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: .5em;
-		right: .5em;
-		margin: auto;
-		padding: 2.725em 0 6.25em;
-		width: auto;
-		max-width: 31em;
-		height: auto;
-		line-height: 1.35;
-		font-synthesis: none;
-	}
+/*  Content  */
+#content {
+	display: block;
+	position: relative;
+	margin: 0;
+	border: none;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	color: inherit;
+	background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, currentColor 1px, transparent 1px) top left / auto 1.35em repeat padding-box;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit;
+	white-space: pre-wrap;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	resize: none;
+}
+#content:focus {
+	outline: none;
+}
 
-	/*  Topbar  */
-	*[role="menubar"] {
-		display: block;
-		position: absolute;
-		top: .675em;
-		left: 0;
-		margin: 0;
-		border: none;
-		border-radius: 1ex 1ex 0 0;
-		padding: 0;
-		width: auto;
-		height: 1.35em;
-		overflow: hidden;
-	}
-	*[role="menubar"] *[role="group"] { display: inline-block }
-	*[role="menubar"] *.menu-item {
-		display: inline-block;
-		margin: 0;
-		border: none;
-		padding: 0;
-		width: 2rem;
-		height: 1.35rem;
-		color: inherit;
-		background: none;
-		font-size: inherit;
-		font-family: inherit;
-		font-weight: bold;
-		line-height: 1.35rem;
-		text-align: center;
-		text-decoration: none;
-		vertical-align: top;
-		cursor: pointer;
-	}
-	*[role="menubar"] *.menu-item + *.menu-item { border-left: thin currentColor solid }
-	*[role="menubar"] hr {
-		display: inline-block;
-		box-sizing: content-box;
-		margin: 0;
-		border-width: 0px thin;
-		border-color: currentColor;
-		border-style: none solid;
-		padding: 0;
-		color: inherit;
-		background: none;
-		width: 2px;
-		height: 1.35rem;
-		vertical-align: top;
-	}
-	#font-menu *.menu-item::after { content: "A" }
-	#io-menu *.menu-item[title="Upload"]::after { content: "⬆" }
-	#io-menu *.menu-item[title="Download"]::after { content: "⬇" }
+/*  Bottombar  */
+aside {
+	display: block;
+	position: absolute;
+	bottom: 4.225em;
+	left: 0;
+	margin: 0;
+	border: none;
+	border-radius: 0 0 1ex 1ex;
+	padding: 0 .35em;
+	width: auto;
+	max-width: calc(100% - .7em);
+	height: 1.35em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+aside hr {
+	display: inline-block;
+	margin: 0 .35em;
+	border-width: 0px thin 0px 0px;
+	border-color: currentColor;
+	border-style: none solid none none;
+	padding: 0;
+	color: inherit;
+	background: none;
+	width: 0;
+	height: 100%;
+	vertical-align: top;
+}
 
-	/*  Content  */
-	#content {
-		display: block;
-		position: relative;
-		margin: 0;
-		border: none;
-		padding: 0;
-		width: 100%;
-		height: 100%;
-		color: inherit;
-		background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, currentColor 1px, transparent 1px) top left / auto 1.35em repeat padding-box;
-		font-size: inherit;
-		font-family: inherit;
-		line-height: inherit;
-		white-space: pre-wrap;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		resize: none;
-	}
-	#content:focus {
-		outline: none;
-	}
+/*  Footer  */
+footer {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 1em 0;
+	border: none;
+	height: 2.7em;
+	font-family: serif;
+	font-size: .75em;
+	line-height: 1.35;
+	text-align: right;
+	white-space: nowrap;
+}
+footer *[role="link"], footer a[href] {
+	font-style: italic;
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	cursor: pointer;
+}
 
-	/*  Bottombar  */
-	aside {
-		display: block;
-		position: absolute;
-		bottom: 4.225em;
-		left: 0;
-		margin: 0;
-		border: none;
-		border-radius: 0 0 1ex 1ex;
-		padding: 0 .35em;
-		width: auto;
-		max-width: calc(100% - .7em);
-		height: 1.35em;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+/*  Small screens  */
+@media screen and (max-height: 25em) {
+	body { padding: 2.725em 0 }
+	aside { bottom: .675em }
+	footer { display: none }
+}
+		</style>
+		<style type="text/css" title="Basic">
+*[role="menubar"], aside {
+	color: AliceBlue;
+	background: SteelBlue;
+}
+*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+	color: MidnightBlue;
+	background: LightSteelBlue;
+}
+*[role="menubar"] *.menu-item[aria-checked="true"] {
+	color: MidnightBlue;
+	background: AliceBlue;
+}
+*[role="menubar"] *.menu-item + *.menu-item { border-color: AliceBlue }
+#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box; }
+footer { color: SteelBlue }
+time {
+	animation: blink-animation 1s steps(4, start) infinite;
+}
+@keyframes blink-animation {
+	to {
+		visibility: hidden;
 	}
-	aside hr {
-		display: inline-block;
-		margin: 0 .35em;
-		border-width: 0px thin 0px 0px;
-		border-color: currentColor;
-		border-style: none solid none none;
-		padding: 0;
-		color: inherit;
-		background: none;
-		width: 0;
-		height: 100%;
-		vertical-align: top;
-	}
+}
+		</style>
+	</head>
+	<!--  Application  -->
+	<body role="application">
 
-	/*  Footer  */
-	footer {
-		display: block;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: 1em 0;
-		border: none;
-		height: 2.7em;
-		font-family: serif;
-		font-size: .75em;
-		line-height: 1.35;
-		text-align: right;
-		white-space: nowrap;
-	}
-	footer *[role="link"], footer a[href] {
-		font-style: italic;
-		color: inherit;
-		text-decoration: underline;
-		text-decoration-style: dashed;
-		cursor: pointer;
-	}
-
-	/*  Small screens  */
-	@media screen and (max-height: 25em) {
-		body { padding: 2.725em 0 }
-		aside { bottom: .675em }
-		footer { display: none }
-	}
-
-</style>
-
-<style type="text/css" title="Basic">
-	*[role="menubar"], aside {
-		color: AliceBlue;
-		background: SteelBlue;
-	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: MidnightBlue;
-		background: LightSteelBlue;
-	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: MidnightBlue;
-		background: AliceBlue;
-	}
-	*[role="menubar"] *.menu-item + *.menu-item { border-color: AliceBlue }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box; }
-	footer { color: SteelBlue }
-</style>
-
-<!--  Application  -->
-<body role="application">
-
-	<!--  Topbar  -->
-	<div role="menubar">
-		<div id="font-menu" role="group">
-			<button id="font-sans" class="menu-item" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif"></button><button id="font-serif" class="menu-item" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif"></button><button id="font-cursive" class="menu-item" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive"></button><button id="font-monospace" class="menu-item" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace"></button><button id="font-fantasy" class="menu-item" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy"></button>
-		</div><hr><div id="io-menu" role="group">
-			<label class="menu-item" for="io-upload" title="Upload"><input id="io-upload" type="file" style="display: none"></label><a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
+		<!--  Topbar  -->
+		<div role="menubar">
+			<div id="font-menu" role="group">
+				<button id="font-sans" class="menu-item" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif"></button>
+				<button id="font-serif" class="menu-item" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif"></button>
+				<button id="font-monospace" class="menu-item" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace"></button>
+			</div>
+			<hr>
+			<div id="io-menu" role="group">
+				<label class="menu-item" for="io-upload" title="Upload"><input id="io-upload" type="file" style="display: none"></label>
+				<a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
+			</div>
 		</div>
-	</div>
 
-	<!--  Content  -->
-	<textarea id="content" autofocus style="font-family: sans-serif"></textarea>
+		<!--  Content  -->
+		<textarea id="content" autofocus style="font-family: sans-serif"></textarea>
 
-	<!--  Bottombar  -->
-	<aside role="note">
-		<time id="datetime" title="Time unknown"><span id="datetime-hours">??</span><span id="datetime-sep" style="opacity: 1;">:</span><span id="datetime-mins">??</span></time><hr><span id="wordcount">??? characters, ??? words</span>
-	</aside>
+		<!--  Bottombar  -->
+		<aside role="note">
+			<time id="datetime" title="Time unknown">00:00</time><hr><span id="wordcount">??? characters, ??? words</span>
+		</aside>
 
-	<!--  Footer content  -->
-	<footer>
-		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.1.0</a> – 😈<br>
-		<a href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</a>
-	</footer>
+		<!--  Footer content  -->
+		<footer>
+			<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.1.0</a> – 😈<br>
+			<a href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</a>
+		</footer>
 
-	<!--  Application script  -->
-	<script type="text/javascript">
-		+function () {
-			var get = function (s) { return document.getElementById.call(document, s) };
-			var font_buttons = [
-				get("font-sans"),
-				get("font-serif"),
-				get("font-cursive"),
-				get("font-monospace"),
-				get("font-fantasy"),
-			];
-			var upload = get("io-upload");
-			var download = get("io-download");
-			var content = get("content");
-			var wordcount = get("wordcount");
-			var datetime = get("datetime");
-			var hours = get("datetime-hours");
-			var sep = get("datetime-sep");
-			var minutes = get("datetime-mins");
-			var updateBackground = function () { content.style.backgroundPositionY = "-" + content.scrollTop + "px" };
-			var updateFont = function (index) {
-				content.style.fontFamily = font_buttons[index].style.fontFamily;
-				updateBackground();
-				for (var i = 0; i < font_buttons.length; i++) {
-					var elt = font_buttons[i];
-					if (index === i) elt.setAttribute("aria-checked", true);
-					else elt.setAttribute("aria-checked", false);
-				}
-			};
-			var updateInput = function () {
-				var text = content.value;
-				download.href = "data:text/plain;charset=utf-8," + encodeURIComponent(text);
-				download.download = ((text.match(/[^\n]+/) || [""])[0].substr(0, 18) || "My Document") + ".txt";
-				text = text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "�");
-				var characters = text.length;
-				var words = (text.replace(/[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/, "").replace(/\u2014/g, " ").match(/\S(?:\s+|$)/g) || []).length;
-				wordcount.textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words");
+		<!--  Application script  -->
+		<script type="text/javascript">
+'use strict';
+class Writer {
+	constructor () {
+		this.fonts = [
+			this.get('font-sans'),
+			this.get('font-serif'),
+			this.get('font-monospace')
+		]
+		this.upload     = this.get('io-upload')
+		this.download   = this.get('io-download')
+		this.content    = this.get('content')
+		this.wordcount  = this.get('wordcount')
+		this.datetime   = this.get('datetime')
+		this.scroll_waiting = false
+		this.input_waiting  = false
+
+		this.updateFont(0)
+		this.updateInput()
+		window.setInterval(() => { requestAnimationFrame(this.updateTime) }, 1000)
+		this.content.addEventListener('scroll', () => {
+			if (this.scroll_waiting) { return }
+			this.scroll_waiting = true
+			requestAnimationFrame(() => {
+				this.updateBackground()
+				this.scroll_waiting = false
+			})
+		})
+
+		for (let i of this.fonts) {
+			i.addEventListener('click', () => {
+				this.updateFont(this.fonts.indexOf(i))
+			})
+		}
+		this.content.addEventListener('input', () => {
+			if (this.input_waiting) { return }
+			this.input_waiting = true
+			requestAnimationFrame(() => {
+				this.updateInput()
+				this.input_waiting = false
+			})
+		})
+		this.upload.addEventListener('change', () => {
+			let reader = new FileReader()
+			reader.addEventListener('loadend', () => {
+				this.content.value = reader.result
+				this.updateInput()
+			})
+			if (this.upload.files && this.upload.files[0]) {
+				reader.readAsText(this.upload.files[0])
 			}
-			var updateTime = function () {
-				var now = new Date();
-				var n;
-				hours.textContent = (n = now.getHours()) < 10 ? "0" + n : n;
-				sep.style.opacity = now.getSeconds() % 2 ? "0" : "1";
-				minutes.textContent = (n = now.getMinutes()) < 10 ? "0" + n : n;
-				datetime.title = now.toString();
-				datetime.datetime = now.toISOString();
-				setTimeout(function () { requestAnimationFrame(updateTime) }, 1000);
-			}
-			var scroll_waiting = false;
-			var input_waiting = false;
-			updateFont(0);
-			updateInput();
-			updateTime();
-			content.addEventListener("scroll", function () {
-				if (scroll_waiting) return;
-				scroll_waiting = true;
-				requestAnimationFrame(function () {
-					updateBackground();
-					scroll_waiting = false;
-				});
-			});
-			for (var i = 0; i < font_buttons.length; i++) {
-				+function (index) {font_buttons[i].addEventListener("click", function () { updateFont(index) })}(i);
-			}
-			content.addEventListener("input", function () {
-				if (input_waiting) return;
-				input_waiting = true;
-				requestAnimationFrame(function () {
-					updateInput();
-					input_waiting = false;
-				});
-			});
-			upload.addEventListener("change", function () {
-				var reader = new FileReader;
-				reader.addEventListener("loadend", function () {
-					content.value = reader.result;
-					updateInput();
-				});
-				if (this.files && this.files[0]) reader.readAsText(this.files[0]);
-				this.value = null;
-			});
-		}();
-	</script>
-
+			this.upload.value = null
+		})
+	}
+	get (str) {
+		return document.getElementById(str)
+	}
+	updateBackground () {
+		this.content.style.backgroundPositionY = '-' + this.content.scrollTop + 'px'
+	}
+	updateFont (index) {
+		this.content.style.fontFamily = this.fonts[index].style.fontFamily
+		this.updateBackground()
+		for (let i = this.fonts.length - 1; i >= 0; i--) {
+			let elem = this.fonts[i]
+			elem.setAttribute('aria-checked', index === i)
+		}
+	}
+	updateInput () {
+		let text = this.content.value
+		this.download.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent(text)
+		this.download.download = ((text.match(/[^\n]+/) || [''])[0].substr(0, 18) || 'My Document') + '.txt'
+		text = text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '�')
+		let chars = text.length
+		let words = (text.replace(/[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/, '').replace(/\u2014/g, '').match(/\S(?:\s+|$)/g) || []).length
+		this.wordcount.textContent = chars + ' character' + (chars === 1 ? ', ' : 's, ') + words + ' word' + (words === 1 ? '' : 's')
+	}
+	updateTime () {
+		let now = new Date()
+		let opts = {hour: 'numeric', minute: 'numeric', hour12: false}
+		document.getElementById('datetime').textContent = now.toLocaleString('nu-latn', opts)
+	}
+}
+var writer = new Writer()
+writer.updateTime()
+		</script>
+	</body>
 	<!--  EOF  -->
+</html>
