@@ -3,6 +3,7 @@
 <!--  Metadata content  -->
 <title>KibiWriter</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!--  Core styling  -->
 <style type="text/css">
@@ -152,6 +153,7 @@
 		text-decoration-style: dashed;
 		cursor: pointer;
 	}
+	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
 
 	/*  Small screens  */
 	@media screen and (max-height: 25em) {
@@ -170,6 +172,7 @@
 	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
 		color: MidnightBlue;
 		background: LightSteelBlue;
+		outline: none;
 	}
 	*[role="menubar"] *.menu-item[aria-checked="true"] {
 		color: MidnightBlue;
@@ -188,7 +191,7 @@
 		<div id="font-menu" role="group">
 			<button id="font-sans" class="menu-item" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif"></button><button id="font-serif" class="menu-item" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif"></button><button id="font-cursive" class="menu-item" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive"></button><button id="font-monospace" class="menu-item" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace"></button><button id="font-fantasy" class="menu-item" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy"></button>
 		</div><hr><div id="io-menu" role="group">
-			<label class="menu-item" for="io-upload" title="Upload"><input id="io-upload" type="file" style="display: none"></label><a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
+			<label class="menu-item" for="io-upload" title="Upload" tabindex="0"><input id="io-upload" type="file" style="display: none"></label><a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
 		</div>
 	</div>
 
@@ -202,92 +205,93 @@
 
 	<!--  Footer content  -->
 	<footer>
-		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.1.0</a> – 😈<br>
+		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.1.1</a> – 👿<br>
 		<a href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</a>
 	</footer>
 
 	<!--  Application script  -->
 	<script type="text/javascript">
-		+function () {
-			var get = function (s) { return document.getElementById.call(document, s) };
+		void function () {
+			var ｄｏ = function (f) { return f () }
+			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
+			var ｙｅｓ = true
+			var ｎｏ = false
 			var font_buttons = [
-				get("font-sans"),
-				get("font-serif"),
-				get("font-cursive"),
-				get("font-monospace"),
-				get("font-fantasy"),
+				ｇｅｔ ("font-sans") ,
+				ｇｅｔ ("font-serif") ,
+				ｇｅｔ ("font-cursive") ,
+				ｇｅｔ ("font-monospace") ,
+				ｇｅｔ ("font-fantasy") ,
 			];
-			var upload = get("io-upload");
-			var download = get("io-download");
-			var content = get("content");
-			var wordcount = get("wordcount");
-			var datetime = get("datetime");
-			var hours = get("datetime-hours");
-			var sep = get("datetime-sep");
-			var minutes = get("datetime-mins");
-			var updateBackground = function () { content.style.backgroundPositionY = "-" + content.scrollTop + "px" };
+			var upload = ｇｅｔ ("io-upload")
+			var download = ｇｅｔ ("io-download")
+			var content = ｇｅｔ ("content")
+			var wordcount = ｇｅｔ ("wordcount")
+			var datetime = ｇｅｔ ("datetime")
+			var hours = ｇｅｔ ("datetime-hours")
+			var sep = ｇｅｔ ("datetime-sep")
+			var minutes = ｇｅｔ ("datetime-mins")
+			var updateBackground = function () { content . style . backgroundPositionY = "-" + content . scrollTop + "px" }
 			var updateFont = function (index) {
-				content.style.fontFamily = font_buttons[index].style.fontFamily;
-				updateBackground();
-				for (var i = 0; i < font_buttons.length; i++) {
-					var elt = font_buttons[i];
-					if (index === i) elt.setAttribute("aria-checked", true);
-					else elt.setAttribute("aria-checked", false);
+				content . style . fontFamily = font_buttons [index] . style . fontFamily
+				ｄｏ (updateBackground)
+				for (var i = 0 ; i < font_buttons . length ; i++) {
+					var elt = font_buttons [i]
+					if (index === i) elt . setAttribute ("aria-checked" , "true")
+					else elt . setAttribute ("aria-checked" , "false")
 				}
-			};
+			}
 			var updateInput = function () {
-				var text = content.value;
-				download.href = "data:text/plain;charset=utf-8," + encodeURIComponent(text);
-				download.download = ((text.match(/[^\n]+/) || [""])[0].substr(0, 18) || "My Document") + ".txt";
-				text = text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "�");
-				var characters = text.length;
-				var words = (text.replace(/[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/, "").replace(/\u2014/g, " ").match(/\S(?:\s+|$)/g) || []).length;
-				wordcount.textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words");
+				var text = content . value
+				download . href = "data:text/plain;charset=utf-8," + encodeURIComponent (text)
+				download . download = ((text . match (/[^\n]+/) || [""]) [0] . substr (0 , 40) || "My Document") + ".txt"
+				text = text . replace (/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "�")
+				var characters = text . length
+				var words = (text . replace (/[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/g, "") . replace (/\u2014/g, " ") . match (/\S(?:\s+|$)/g) || []) . length
+				wordcount . textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words")
 			}
 			var updateTime = function () {
-				var now = new Date();
-				var n;
-				hours.textContent = (n = now.getHours()) < 10 ? "0" + n : n;
-				sep.style.opacity = now.getSeconds() % 2 ? "0" : "1";
-				minutes.textContent = (n = now.getMinutes()) < 10 ? "0" + n : n;
-				datetime.title = now.toString();
-				datetime.datetime = now.toISOString();
-				setTimeout(function () { requestAnimationFrame(updateTime) }, 1000);
+				var now = new Date
+				var n
+				hours . textContent = (n = now . getHours . call (now)) < 10 ? "0" + n : n
+				sep . style . opacity = now . getSeconds . call (now) % 2 ? "0" : "1"
+				minutes . textContent = (n = now . getMinutes . call (now)) < 10 ? "0" + n : n
+				datetime . title = now . toString . call (now)
+				datetime . datetime = now . toISOString . call (now)
+				setTimeout (function () { requestAnimationFrame (updateTime) } , 1000)
 			}
-			var scroll_waiting = false;
-			var input_waiting = false;
-			updateFont(0);
-			updateInput();
-			updateTime();
-			content.addEventListener("scroll", function () {
-				if (scroll_waiting) return;
-				scroll_waiting = true;
-				requestAnimationFrame(function () {
-					updateBackground();
-					scroll_waiting = false;
-				});
-			});
-			for (var i = 0; i < font_buttons.length; i++) {
-				+function (index) {font_buttons[i].addEventListener("click", function () { updateFont(index) })}(i);
-			}
-			content.addEventListener("input", function () {
-				if (input_waiting) return;
-				input_waiting = true;
-				requestAnimationFrame(function () {
-					updateInput();
-					input_waiting = false;
-				});
-			});
-			upload.addEventListener("change", function () {
-				var reader = new FileReader;
-				reader.addEventListener("loadend", function () {
-					content.value = reader.result;
-					updateInput();
-				});
-				if (this.files && this.files[0]) reader.readAsText(this.files[0]);
-				this.value = null;
-			});
-		}();
+			var scroll_waiting = ｎｏ
+			var input_waiting = ｎｏ
+			updateFont (0)
+			ｄｏ (updateInput)
+			ｄｏ (updateTime)
+			content . addEventListener ("scroll" , function () {
+				if (scroll_waiting) return
+				scroll_waiting = ｙｅｓ
+				requestAnimationFrame (function () {
+					ｄｏ (updateBackground)
+					scroll_waiting = ｎｏ
+				})
+			})
+			for (var i = 0 ; i < font_buttons . length ; i++) void function (index) { font_buttons [i] . addEventListener ("click", function () { updateFont (index) }) } (i)
+			content . addEventListener ("input" , function () {
+				if (input_waiting) return
+				input_waiting = ｙｅｓ
+				requestAnimationFrame (function () {
+					ｄｏ (updateInput)
+					input_waiting = ｎｏ
+				})
+			})
+			upload . addEventListener ("change", function () {
+				var reader = new FileReader
+				reader . addEventListener ("loadend", function () {
+					content . value = reader . result
+					ｄｏ (updateInput)
+				})
+				if (this . files && this . files [0]) reader . readAsText (this . files [0])
+				this . value = null
+			})
+		} ()
 	</script>
 
 	<!--  EOF  -->
