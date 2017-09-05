@@ -2,6 +2,21 @@
 
 ##  Version 0  ##
 
+###  0.2:
+
+####  0.2.0
+
+#####  NEW.
+
++ Theming support has been added (Issue #1)[https://github.com/marrus-sh/writer/issues/1]! The following themes are supported:
+    + Basic (blue)
+    + Wine
+    + Orange
+    + Pink
+    + Legendary (blue + tan)
+    + New Legendary (green + tan)
+    + Vampire (black + red)
+
 ###  0.1:
 
 ####  0.1.1

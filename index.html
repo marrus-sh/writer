@@ -32,15 +32,15 @@
 		left: 0;
 		margin: 0;
 		border: none;
-		border-radius: 1ex 1ex 0 0;
 		padding: 0;
 		width: auto;
 		height: 1.35em;
-		overflow: hidden;
+		font-weight: bold;
 	}
 	*[role="menubar"] *[role="group"] { display: inline-block }
 	*[role="menubar"] *.menu-item {
 		display: inline-block;
+		position: relative;
 		margin: 0;
 		border: none;
 		padding: 0;
@@ -49,8 +49,8 @@
 		color: inherit;
 		background: none;
 		font-size: inherit;
+		font-weight: inherit;
 		font-family: inherit;
-		font-weight: bold;
 		line-height: 1.35rem;
 		text-align: center;
 		text-decoration: none;
@@ -72,9 +72,93 @@
 		height: 1.35rem;
 		vertical-align: top;
 	}
+	#theme-container {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		overflow: hidden;
+		font-weight: normal;
+		z-index: 100;
+	}
+	#theme-container *.menu-item { border: none }
+	#font-menu *.menu-item:first-child { border-radius: 1ex 0 0 0 }
 	#font-menu *.menu-item::after { content: "A" }
+	#theme-menu::after {
+		font-style: italic;
+		content: "T";
+	}
+	#theme-menu *.menu-item[aria-checked="true"]::before, #theme-menu *.menu-item[aria-checked="true"]::after {
+		content: " · ";
+	}
+	#io-menu *.menu-item:last-child { border-radius: 0 1ex 0 0 }
 	#io-menu *.menu-item[title="Upload"]::after { content: "⬆" }
 	#io-menu *.menu-item[title="Download"]::after { content: "⬇" }
+
+	/*  Theme buttons  */
+	#theme-menu #theme-basic {
+		color: AliceBlue;
+		background: SteelBlue;
+	}
+	#theme-menu #theme-basic:focus, #theme-basic:hover {
+		color: MidnightBlue;
+		background: LightSteelBlue;
+		outline: none;
+	}
+	#theme-menu #theme-wine {
+		color: #f3dee3;
+		background: #700020;
+	}
+	#theme-menu #theme-wine:focus, #theme-wine:hover {
+		color: #97596b;
+		background: #f3dee3;
+		outline: none;
+	}
+	#theme-menu #theme-orange {
+		color: PapayaWhip;
+		background: DarkOrange;
+	}
+	#theme-menu #theme-orange:focus, #theme-orange:hover {
+		color: Orange;
+		background: PapayaWhip;
+		outline: none;
+	}
+	#theme-menu #theme-pink {
+		color: LavenderBlush;
+		background: DeepPink;
+	}
+	#theme-menu #theme-pink:focus, #theme-pink:hover {
+		color: HotPink;
+		background: LavenderBlush;
+		outline: none;
+	}
+	#theme-menu #theme-legendary {
+		color: black;
+		background: #777899;
+	}
+	#theme-menu #theme-legendary:focus, #theme-legendary:hover {
+		color: #001155;
+		background: #AAABBC;
+		outline: none;
+	}
+	#theme-menu #theme-nleg {
+		color: #FFF8E3;
+		background: #336633;
+	}
+	#theme-menu #theme-nleg:focus, #theme-nleg:hover {
+		color: #FFF8E3;
+		background: #776335;
+		outline: none;
+	}
+	#theme-menu #theme-vampire {
+		color: #EEEEEE;
+		background: #000000;
+	}
+	#theme-menu #theme-vampire:focus, #theme-vampire:hover {
+		color: #220000;
+		background: #DEDEDE;
+		outline: none;
+	}
 
 	/*  Content  */
 	#content {
@@ -86,7 +170,7 @@
 		width: 100%;
 		height: 100%;
 		color: inherit;
-		background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, currentColor 1px, transparent 1px) top left / auto 1.35em repeat padding-box;
+		background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, currentColor 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white
 		font-size: inherit;
 		font-family: inherit;
 		line-height: inherit;
@@ -108,13 +192,18 @@
 		margin: 0;
 		border: none;
 		border-radius: 0 0 1ex 1ex;
-		padding: 0 .35em;
+		padding: 0;
 		width: auto;
-		max-width: calc(100% - .7em);
+		max-width: 100%;
 		height: 1.35em;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+	aside::before, aside::after {
+		display: inline-block;
+		width: .35em;
+		content: "";
 	}
 	aside hr {
 		display: inline-block;
@@ -153,7 +242,6 @@
 		text-decoration-style: dashed;
 		cursor: pointer;
 	}
-	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
 
 	/*  Small screens  */
 	@media screen and (max-height: 25em) {
@@ -164,8 +252,8 @@
 
 </style>
 
-<style type="text/css" title="Basic">
-	*[role="menubar"], aside {
+<style id="style-selected" type="text/css" title="Selected Style">
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: AliceBlue;
 		background: SteelBlue;
 	}
@@ -179,8 +267,176 @@
 		background: AliceBlue;
 	}
 	*[role="menubar"] *.menu-item + *.menu-item { border-color: AliceBlue }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box; }
+	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: SteelBlue }
+	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
+</style>
+
+<style id="style-basic" type="text/css" title="Basic" disabled>
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: AliceBlue;
+		background: SteelBlue;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: MidnightBlue;
+		background: LightSteelBlue;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: MidnightBlue;
+		background: AliceBlue;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: AliceBlue }
+	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
+	footer { color: SteelBlue }
+	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
+</style>
+
+<style id="style-wine" type="text/css" title="Wine" disabled>
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: #f3dee3;
+		background: #700020;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: #97596b;
+		background: #f3dee3;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: #700020;
+		background: #f3dee3;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #d6c6c9 }
+	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, #992244 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
+	footer { color: #97596b }
+	footer *[role="link"]:hover, footer a[href]:hover { color: #700020 }
+</style>
+
+<style id="style-orange" type="text/css" title="Orange" disabled>
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: PapayaWhip;
+		background: DarkOrange;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: Orange;
+		background: PapayaWhip;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: DarkOrange;
+		background: PapayaWhip;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: PapayaWhip }
+	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, Orange 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
+	footer { color: DarkOrange }
+	footer *[role="link"]:hover, footer a[href]:hover { color: Orange }
+</style>
+
+<style id="style-pink" type="text/css" title="Pink" disabled>
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: LavenderBlush;
+		background: DeepPink;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: HotPink;
+		background: LavenderBlush;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: DeepPink;
+		background: LavenderBlush;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: LavenderBlush }
+	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, HotPink 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
+	footer { color: HotPink }
+	footer *[role="link"]:hover, footer a[href]:hover { color: DeepPink }
+</style>
+
+<style id="style-legendary" type="text/css" title="Legendary" disabled>
+	body { background: #999ABC }
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: black;
+		background: #777899;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: #001155;
+		background: #AAABBC;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: black;
+		background: #EEE8DD;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #001155 }
+	#content {
+		margin: -.675em 0;
+		border: 1px #545454 solid;
+		padding: calc(.675em - 1px) calc(1em - 1px);
+		width: calc(100% - 2em);
+		height: 100%;
+		color: #334566;
+		background: repeating-linear-gradient(to right, #EEEEEE, #EEEEEE .075em, transparent .075em, transparent .225em, #EEEEEE .225em, #EEEEEE .3em), linear-gradient(to top, #334566 1px, transparent 1px) top left / auto 1.35em repeat content-box, #EEEEEE;
+	}
+	footer { color: #334566 }
+	footer *[role="link"]:hover, footer a[href]:hover { color: #001155 }
+</style>
+
+<style id="style-nleg" type="text/css" title="New Legendary" disabled>
+	body { background: #FFF8E3 }
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: #FFF8E3;
+		background: #336633;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: #FFF8E3;
+		background: #776335;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: #776335;
+		background: #EEDDBF;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #FFF8E3 }
+	#content {
+		margin: -.675em 0;
+		border: 1px #AA9F7F solid;
+		padding: calc(.675em - 1px) calc(1em - 1px);
+		width: calc(100% - 2em);
+		height: 100%;
+		color: #332714;
+		background: repeating-linear-gradient(to right, #EEDDBF, #EEDDBF .075em, transparent .075em, transparent .225em, #EEDDBF .225em, #EEDDBF .3em), linear-gradient(to top, #887256 1px, transparent 1px) top left / auto 1.35em repeat content-box, #EEDDBF;
+	}
+	footer { color: #443628 }
+	footer *[role="link"]:hover, footer a[href]:hover { color: #776335 }
+</style>
+
+<style id="style-vampire" type="text/css" title="Vampire" disabled>
+	body { background: #222222 }
+	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
+		color: #EEEEEE;
+		background: #000000;
+	}
+	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
+		color: #220000;
+		background: #DEDEDE;
+		outline: none;
+	}
+	*[role="menubar"] *.menu-item[aria-checked="true"] {
+		color: #DEDEDE;
+		background: #550022;
+	}
+	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #DEDEDE }
+	#content {
+		margin: -.675em 0;
+		border: 1px #220000 solid;
+		padding: calc(.675em - 1px) calc(1em - 1px);
+		width: calc(100% - 2em);
+		height: 100%;
+		color: #BB99AA;
+		background: repeating-linear-gradient(to right, #131313, #131313 .075em, transparent .075em, transparent .225em, #131313 .225em, #131313 .3em), linear-gradient(to top, #550022 1px, transparent 1px) top left / auto 1.35em repeat content-box, #131313;
+	}
+	footer { color: #BCBCBC }
+	footer *[role="link"]:hover, footer a[href]:hover { color: #DEDEDE }
 </style>
 
 <!--  Application  -->
@@ -188,8 +444,12 @@
 
 	<!--  Topbar  -->
 	<div role="menubar">
-		<div id="font-menu" role="group">
+		<div id="font-menu" role="group" title="Fonts">
 			<button id="font-sans" class="menu-item" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif"></button><button id="font-serif" class="menu-item" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif"></button><button id="font-cursive" class="menu-item" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive"></button><button id="font-monospace" class="menu-item" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace"></button><button id="font-fantasy" class="menu-item" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy"></button>
+		</div><hr><div id="theme-menu" class="menu-item" role="menuitemcheckbox" title="Show themes" aria-checked="false" aria-haspopup="true" tabindex="0">
+			<div id="theme-container" role="menu" hidden>
+				<button id="theme-basic" class="menu-item" role="menuitemradio" title="Basic theme" aria-checked="true">1</button><button id="theme-wine" class="menu-item" role="menuitemradio" title="Wine theme">2</button><button id="theme-orange" class="menu-item" role="menuitemradio" title="Orange theme">3</button><button id="theme-pink" class="menu-item" role="menuitemradio" title="Pink theme">4</button><button id="theme-legendary" class="menu-item" role="menuitemradio" title="Legendary theme">5</button><button id="theme-nleg" class="menu-item" role="menuitemradio" title="New legendary theme">6</button><button id="theme-vampire" class="menu-item" role="menuitemradio" title="Vampire theme">7</button>
+			</div>
 		</div><hr><div id="io-menu" role="group">
 			<label class="menu-item" for="io-upload" title="Upload" tabindex="0"><input id="io-upload" type="file" style="display: none"></label><a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
 		</div>
@@ -205,7 +465,7 @@
 
 	<!--  Footer content  -->
 	<footer>
-		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.1.1</a> – 👿<br>
+		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.2.0</a> – 📝<br>
 		<a href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</a>
 	</footer>
 
@@ -216,13 +476,34 @@
 			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
 			var ｙｅｓ = true
 			var ｎｏ = false
+			var theme_styler = ｇｅｔ ("style-selected")
+			var themes = [
+				ｇｅｔ ("style-basic") ,
+				ｇｅｔ ("style-wine") ,
+				ｇｅｔ ("style-orange") ,
+				ｇｅｔ ("style-pink") ,
+				ｇｅｔ ("style-legendary") ,
+				ｇｅｔ ("style-nleg") ,
+				ｇｅｔ ("style-vampire") ,
+			]
 			var font_buttons = [
 				ｇｅｔ ("font-sans") ,
 				ｇｅｔ ("font-serif") ,
 				ｇｅｔ ("font-cursive") ,
 				ｇｅｔ ("font-monospace") ,
 				ｇｅｔ ("font-fantasy") ,
-			];
+			]
+			var themer = ｇｅｔ ("theme-menu")
+			var theme_container = ｇｅｔ ("theme-container")
+			var theme_buttons = [
+				ｇｅｔ ("theme-basic") ,
+				ｇｅｔ ("theme-wine") ,
+				ｇｅｔ ("theme-orange") ,
+				ｇｅｔ ("theme-pink") ,
+				ｇｅｔ ("theme-legendary") ,
+				ｇｅｔ ("theme-nleg") ,
+				ｇｅｔ ("theme-vampire") ,
+			]
 			var upload = ｇｅｔ ("io-upload")
 			var download = ｇｅｔ ("io-download")
 			var content = ｇｅｔ ("content")
@@ -239,6 +520,22 @@
 					var elt = font_buttons [i]
 					if (index === i) elt . setAttribute ("aria-checked" , "true")
 					else elt . setAttribute ("aria-checked" , "false")
+				}
+			}
+			var toggleThemeMenu = function (value) {
+				if (typeof value !== "boolean") value = !(themer . getAttribute ("aria-checked") === "true")
+				themer . setAttribute ("aria-checked" , value)
+				if (!value) theme_container . setAttribute ("hidden", "")
+				else theme_container . removeAttribute ("hidden")
+			}
+			var updateTheme = function (index) {
+				var theme = theme_buttons [index] . id . substr (6)
+				for (var i = 0 ; i < themes . length ; i++) {
+					var style = themes [i]
+					var button = theme_buttons [i]
+					if (style . id === "style-" + theme) theme_styler.textContent = style.textContent
+					if (index === i) button . setAttribute ("aria-checked" , "true")
+					else button . setAttribute ("aria-checked" , "false")
 				}
 			}
 			var updateInput = function () {
@@ -262,7 +559,9 @@
 			}
 			var scroll_waiting = ｎｏ
 			var input_waiting = ｎｏ
+			var i = 0
 			updateFont (0)
+			updateTheme (0)
 			ｄｏ (updateInput)
 			ｄｏ (updateTime)
 			content . addEventListener ("scroll" , function () {
@@ -273,7 +572,9 @@
 					scroll_waiting = ｎｏ
 				})
 			})
-			for (var i = 0 ; i < font_buttons . length ; i++) void function (index) { font_buttons [i] . addEventListener ("click", function () { updateFont (index) }) } (i)
+			for (i = 0 ; i < font_buttons . length ; i++) void function (index) { font_buttons [i] . addEventListener ("click", function () { updateFont (index) }) } (i)
+			themer . addEventListener ("click", toggleThemeMenu)
+			for (i = 0 ; i < themes . length ; i++) void function (index) { theme_buttons [i] . addEventListener ("click", function () { updateTheme (index) }) } (i)
 			content . addEventListener ("input" , function () {
 				if (input_waiting) return
 				input_waiting = ｙｅｓ
@@ -282,6 +583,7 @@
 					input_waiting = ｎｏ
 				})
 			})
+			content . addEventListener ("focus" , function () { toggleThemeMenu (ｎｏ) })
 			upload . addEventListener ("change", function () {
 				var reader = new FileReader
 				reader . addEventListener ("loadend", function () {
