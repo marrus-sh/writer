@@ -474,6 +474,14 @@
 		void function () {
 			var ｄｏ = function (f) { return f () }
 			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
+			var ｑｕｅｒｙ = function (k) {
+				var search = location . search
+				if (search . startsWith ("?")) search = search . substr(1)
+				var pair_strings =  search . split ("&")
+				var pairs = []
+				for (var i = 0 ; i < pair_strings . length ; i++) if (pair_strings [i] . startsWith (k + "=")) return pair_strings [i] . substr (k . length + 1)
+			}
+				
 			var ｙｅｓ = true
 			var ｎｏ = false
 			var theme_styler = ｇｅｔ ("style-selected")
@@ -561,7 +569,10 @@
 			var input_waiting = ｎｏ
 			var i = 0
 			updateFont (0)
-			updateTheme (0)
+			var initial_theme = 0
+			var initial_theme_name = ｑｕｅｒｙ ("theme")
+			for (i = 0 ; i < themes . length ; i++) if (themes [i] . id === "style-" + initial_theme_name) initial_theme = i
+			updateTheme (initial_theme)
 			ｄｏ (updateInput)
 			ｄｏ (updateTime)
 			content . addEventListener ("scroll" , function () {
