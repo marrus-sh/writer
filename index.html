@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!DoCtYpE HtMl>
 
 <!--  Metadata content  -->
-<title>KibiWriter</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<TITLE>KibiWriter</TITLE>
+<META charset="utf-8">
+<META name="viewport" content="width=device-width,initial-scale=1">
 
 <!--  Core styling  -->
-<style type="text/css">
+<STYLE type="text/css">
 
 	/*  Application  */
-	body {
+	BODY {
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -36,6 +36,7 @@
 		width: auto;
 		height: 1.35em;
 		font-weight: bold;
+		white-space: nowrap;
 	}
 	*[role="menubar"] *[role="group"] { display: inline-block }
 	*[role="menubar"] *.menu-item {
@@ -58,7 +59,7 @@
 		cursor: pointer;
 	}
 	*[role="menubar"] *.menu-item + *.menu-item { border-left: thin currentColor solid }
-	*[role="menubar"] hr {
+	*[role="menubar"] HR {
 		display: inline-block;
 		box-sizing: content-box;
 		margin: 0;
@@ -92,6 +93,7 @@
 		content: " · ";
 	}
 	#io-menu *.menu-item:last-child { border-radius: 0 1ex 0 0 }
+	#io-menu *.menu-item[title="Clear document"]::after { content: "✘" }
 	#io-menu *.menu-item[title="Upload"]::after { content: "⬆" }
 	#io-menu *.menu-item[title="Download"]::after { content: "⬇" }
 
@@ -184,7 +186,7 @@
 	}
 
 	/*  Bottombar  */
-	aside {
+	ASIDE {
 		display: block;
 		position: absolute;
 		bottom: 4.225em;
@@ -200,12 +202,12 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	aside::before, aside::after {
+	ASIDE::before, ASIDE::after {
 		display: inline-block;
 		width: .35em;
 		content: "";
 	}
-	aside hr {
+	ASIDE HR {
 		display: inline-block;
 		margin: 0 .35em;
 		border-width: 0px thin 0px 0px;
@@ -220,7 +222,7 @@
 	}
 
 	/*  Footer  */
-	footer {
+	FOOTER {
 		display: block;
 		position: absolute;
 		bottom: 0;
@@ -235,7 +237,7 @@
 		text-align: right;
 		white-space: nowrap;
 	}
-	footer *[role="link"], footer a[href] {
+	FOOTER *[role="link"], FOOTER A[href] {
 		font-style: italic;
 		color: inherit;
 		text-decoration: underline;
@@ -245,14 +247,14 @@
 
 	/*  Small screens  */
 	@media screen and (max-height: 25em) {
-		body { padding: 2.725em 0 }
-		aside { bottom: .675em }
-		footer { display: none }
+		BODY { padding: 2.725em 0 }
+		ASIDE { bottom: .675em }
+		FOOTER { display: none }
 	}
 
-</style>
+</STYLE>
 
-<style id="style-selected" type="text/css" title="Selected Style">
+<STYLE id="style-selected" type="text/css" title="Selected Style">
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: AliceBlue;
 		background: SteelBlue;
@@ -270,9 +272,9 @@
 	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: SteelBlue }
 	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
-</style>
+</STYLE>
 
-<style id="style-basic" type="text/css" title="Basic" disabled>
+<STYLE id="style-basic" type="text/css" title="Basic">
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: AliceBlue;
 		background: SteelBlue;
@@ -290,9 +292,9 @@
 	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: SteelBlue }
 	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
-</style>
+</STYLE>
 
-<style id="style-wine" type="text/css" title="Wine" disabled>
+<STYLE id="style-wine" type="text/css" title="Wine">
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: #f3dee3;
 		background: #700020;
@@ -310,9 +312,9 @@
 	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, #992244 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: #97596b }
 	footer *[role="link"]:hover, footer a[href]:hover { color: #700020 }
-</style>
+</STYLE>
 
-<style id="style-orange" type="text/css" title="Orange" disabled>
+<STYLE id="style-orange" type="text/css" title="Orange">
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: PapayaWhip;
 		background: DarkOrange;
@@ -330,9 +332,9 @@
 	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, Orange 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: DarkOrange }
 	footer *[role="link"]:hover, footer a[href]:hover { color: Orange }
-</style>
+</STYLE>
 
-<style id="style-pink" type="text/css" title="Pink" disabled>
+<STYLE id="style-pink" type="text/css" title="Pink">
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: LavenderBlush;
 		background: DeepPink;
@@ -350,9 +352,9 @@
 	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, HotPink 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
 	footer { color: HotPink }
 	footer *[role="link"]:hover, footer a[href]:hover { color: DeepPink }
-</style>
+</STYLE>
 
-<style id="style-legendary" type="text/css" title="Legendary" disabled>
+<STYLE id="style-legendary" type="text/css" title="Legendary">
 	body { background: #999ABC }
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: black;
@@ -379,9 +381,9 @@
 	}
 	footer { color: #334566 }
 	footer *[role="link"]:hover, footer a[href]:hover { color: #001155 }
-</style>
+</STYLE>
 
-<style id="style-nleg" type="text/css" title="New Legendary" disabled>
+<STYLE id="style-nleg" type="text/css" title="New Legendary">
 	body { background: #FFF8E3 }
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: #FFF8E3;
@@ -408,9 +410,9 @@
 	}
 	footer { color: #443628 }
 	footer *[role="link"]:hover, footer a[href]:hover { color: #776335 }
-</style>
+</STYLE>
 
-<style id="style-vampire" type="text/css" title="Vampire" disabled>
+<STYLE id="style-vampire" type="text/css" title="Vampire">
 	body { background: #222222 }
 	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
 		color: #EEEEEE;
@@ -437,45 +439,46 @@
 	}
 	footer { color: #BCBCBC }
 	footer *[role="link"]:hover, footer a[href]:hover { color: #DEDEDE }
-</style>
+</STYLE>
 
 <!--  Application  -->
-<body role="application">
+<BODY role="application">
 
 	<!--  Topbar  -->
-	<div role="menubar">
-		<div id="font-menu" role="group" title="Fonts">
-			<button id="font-sans" class="menu-item" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif"></button><button id="font-serif" class="menu-item" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif"></button><button id="font-cursive" class="menu-item" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive"></button><button id="font-monospace" class="menu-item" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace"></button><button id="font-fantasy" class="menu-item" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy"></button>
-		</div><hr><div id="theme-menu" class="menu-item" role="menuitemcheckbox" title="Show themes" aria-checked="false" aria-haspopup="true" tabindex="0">
-			<div id="theme-container" role="menu" hidden>
-				<button id="theme-basic" class="menu-item" role="menuitemradio" title="Basic theme" aria-checked="true">1</button><button id="theme-wine" class="menu-item" role="menuitemradio" title="Wine theme">2</button><button id="theme-orange" class="menu-item" role="menuitemradio" title="Orange theme">3</button><button id="theme-pink" class="menu-item" role="menuitemradio" title="Pink theme">4</button><button id="theme-legendary" class="menu-item" role="menuitemradio" title="Legendary theme">5</button><button id="theme-nleg" class="menu-item" role="menuitemradio" title="New legendary theme">6</button><button id="theme-vampire" class="menu-item" role="menuitemradio" title="Vampire theme">7</button>
-			</div>
-		</div><hr><div id="io-menu" role="group">
-			<label class="menu-item" for="io-upload" title="Upload" tabindex="0"><input id="io-upload" type="file" style="display: none"></label><a id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt"></a>
-		</div>
-	</div>
+	<DIV role="menubar">
+		<DIV id="font-menu" role="group" title="Fonts">
+			<BUTTON id="font-sans" class="menu-item" type="button" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif" accesskey="1"></BUTTON><BUTTON id="font-serif" class="menu-item" type="button" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif" accesskey="2"></BUTTON><BUTTON id="font-cursive" class="menu-item" type="button" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive" accesskey="3"></BUTTON><BUTTON id="font-monospace" class="menu-item" type="button" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace" accesskey="4"></BUTTON><BUTTON id="font-fantasy" class="menu-item" type="button" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy" accesskey="5"></BUTTON>
+		</DIV><HR><DIV id="theme-menu" class="menu-item" role="menuitemcheckbox" title="Show themes" aria-checked="false" aria-haspopup="true" tabindex="0">
+			<DIV id="theme-container" role="menu" hidden>
+				<BUTTON id="theme-basic" class="menu-item" type="button" role="menuitemradio" title="Basic theme" aria-checked="true">1</BUTTON><BUTTON id="theme-wine" class="menu-item" type="button" role="menuitemradio" title="Wine theme" aria-checked="false">2</BUTTON><BUTTON id="theme-orange" class="menu-item" type="button" role="menuitemradio" title="Orange theme" aria-checked="false">3</BUTTON><BUTTON id="theme-pink" class="menu-item" type="button" role="menuitemradio" title="Pink theme" aria-checked="false">4</BUTTON><BUTTON id="theme-legendary" class="menu-item" type="button" role="menuitemradio" title="Legendary theme" aria-checked="false">5</BUTTON><BUTTON id="theme-nleg" class="menu-item" type="button" role="menuitemradio" title="New legendary theme" aria-checked="false">6</BUTTON><BUTTON id="theme-vampire" class="menu-item" type="button" role="menuitemradio" title="Vampire theme" aria-checked="false">7</BUTTON>
+			</DIV>
+		</DIV><HR><DIV id="io-menu" role="group">
+			<BUTTON id="io-clear" class="menu-item" type="button" title="Clear document" accesskey="w"></BUTTON><LABEL class="menu-item" for="io-upload" title="Upload" tabindex="0" accesskey="o"><INPUT id="io-upload" type="file" style="display: none"></LABEL><A id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt" accesskey="s"></A>
+		</DIV>
+	</DIV>
 
 	<!--  Content  -->
-	<textarea id="content" autofocus style="font-family: sans-serif"></textarea>
+	<TEXTAREA id="content" autofocus style="font-family: sans-serif"></TEXTAREA>
 
 	<!--  Bottombar  -->
-	<aside role="note">
-		<time id="datetime" title="Time unknown"><span id="datetime-hours">??</span><span id="datetime-sep" style="opacity: 1;">:</span><span id="datetime-mins">??</span></time><hr><span id="wordcount">??? characters, ??? words</span>
-	</aside>
+	<ASIDE role="note">
+		<TIME id="datetime" title="Time unknown" datetime="00:00"><SPAN id="datetime-hours">??</SPAN><SPAN id="datetime-sep" style="opacity: 1;">:</SPAN><SPAN id="datetime-mins">??</SPAN><SPAN id="datetime-suffix"></SPAN></TIME><HR><SPAN id="wordcount">??? characters, ??? words</SPAN>
+	</ASIDE>
 
 	<!--  Footer content  -->
-	<footer>
-		<a href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.2.0</a> – 📝<br>
-		<a href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</a>
-	</footer>
+	<FOOTER>
+		<A href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.3.0</A> – 💽<BR>
+		<A href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</A>
+	</FOOTER>
 
 	<!--  Application script  -->
-	<script type="text/javascript">
+	<SCRIPT type="text/javascript">
 		void function () {
-			var ｄｏ = function (f) { return f () }
-			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
 			var ｙｅｓ = true
 			var ｎｏ = false
+			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
+			var ｂｉｎｄ = function (f , t) { return arguments . length > 1 ? function (args) { return function () { return f . apply (t , args) } } (Array . prototype . slice . call (arguments , 2)) : function () { return f () } }
+               var ｃａｌｌ = function (f , t) { return arguments . length > 1 ? f . apply (t , Array . prototype . slice . call (arguments , 2)) : f () }
 			var theme_styler = ｇｅｔ ("style-selected")
 			var themes = [
 				ｇｅｔ ("style-basic") ,
@@ -504,6 +507,7 @@
 				ｇｅｔ ("theme-nleg") ,
 				ｇｅｔ ("theme-vampire") ,
 			]
+			var clear = ｇｅｔ ("io-clear")
 			var upload = ｇｅｔ ("io-upload")
 			var download = ｇｅｔ ("io-download")
 			var content = ｇｅｔ ("content")
@@ -512,88 +516,96 @@
 			var hours = ｇｅｔ ("datetime-hours")
 			var sep = ｇｅｔ ("datetime-sep")
 			var minutes = ｇｅｔ ("datetime-mins")
+			var suffix = ｇｅｔ ("datetime-suffix")
 			var updateBackground = function () { content . style . backgroundPositionY = "-" + content . scrollTop + "px" }
 			var updateFont = function (index) {
 				content . style . fontFamily = font_buttons [index] . style . fontFamily
-				ｄｏ (updateBackground)
+				ｃａｌｌ (updateBackground)
 				for (var i = 0 ; i < font_buttons . length ; i++) {
 					var elt = font_buttons [i]
-					if (index === i) elt . setAttribute ("aria-checked" , "true")
-					else elt . setAttribute ("aria-checked" , "false")
+					ｃａｌｌ (elt . setAttribute , elt , "aria-checked" , index === i ? "true" : "false")
 				}
 			}
 			var toggleThemeMenu = function (value) {
-				if (typeof value !== "boolean") value = !(themer . getAttribute ("aria-checked") === "true")
-				themer . setAttribute ("aria-checked" , value)
-				if (!value) theme_container . setAttribute ("hidden", "")
-				else theme_container . removeAttribute ("hidden")
+				typeof value !== "boolean" ? value = !(ｃａｌｌ (themer . getAttribute , themer , "aria-checked") === "true") : void{}
+				themer . setAttribute . call (themer , "aria-checked" , value)
+				!value ? ｃａｌｌ (theme_container . setAttribute , theme_container , "hidden" , "") : ｃａｌｌ (theme_container . removeAttribute , theme_container , "hidden")
 			}
+			var toggle24Hour = function () { ｃａｌｌ (ｃａｌｌ (datetime . classList . contains , datetime . classList , '24h') ? datetime . classList . remove : datetime . classList . add , datetime . classList , '24h') }
 			var updateTheme = function (index) {
-				var theme = theme_buttons [index] . id . substr (6)
+				var theme = ｃａｌｌ (String . prototype . substr , theme_buttons [index] . id , 6)
 				for (var i = 0 ; i < themes . length ; i++) {
 					var style = themes [i]
 					var button = theme_buttons [i]
-					if (style . id === "style-" + theme) theme_styler.textContent = style.textContent
-					if (index === i) button . setAttribute ("aria-checked" , "true")
-					else button . setAttribute ("aria-checked" , "false")
+					style . id === "style-" + theme ? theme_styler . textContent = style . textContent : void{}
+					ｃａｌｌ (button . setAttribute , button , "aria-checked" , index === i ? "true" : "false")
 				}
 			}
 			var updateInput = function () {
 				var text = content . value
-				download . href = "data:text/plain;charset=utf-8," + encodeURIComponent (text)
-				download . download = ((text . match (/[^\n]+/) || [""]) [0] . substr (0 , 40) || "My Document") + ".txt"
-				text = text . replace (/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "�")
+				download . href = "data:text/plain;charset=utf-8," + ｃａｌｌ (window . encodeURIComponent , window , text)
+				download . download = (ｃａｌｌ (String . prototype . substr , (ｃａｌｌ (String . prototype . match , text , /[^\n]+/) || [""]) [0] , 0 , 40) || "My Document") + ".txt"
+				text = ｃａｌｌ (String . prototype . replace , text , /[\uD800-\uDBFF][\uDC00-\uDFFF]/g , "�")
 				var characters = text . length
-				var words = (text . replace (/[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/g, "") . replace (/\u2014/g, " ") . match (/\S(?:\s+|$)/g) || []) . length
+				var words = (ｃａｌｌ (String . prototype . match , ｃａｌｌ (String . prototype . replace , ｃａｌｌ (String . prototype . replace , text , /[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/g , "") , /\u2014/g , " ") , /\S(?:\s+|$)/g) || []) . length
 				wordcount . textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words")
 			}
 			var updateTime = function () {
+				var hour24 = ｃａｌｌ (datetime . classList . contains , datetime . classList , '24h')
 				var now = new Date
 				var n
-				hours . textContent = (n = now . getHours . call (now)) < 10 ? "0" + n : n
-				sep . style . opacity = now . getSeconds . call (now) % 2 ? "0" : "1"
-				minutes . textContent = (n = now . getMinutes . call (now)) < 10 ? "0" + n : n
-				datetime . title = now . toString . call (now)
-				datetime . datetime = now . toISOString . call (now)
-				setTimeout (function () { requestAnimationFrame (updateTime) } , 1000)
+				hours . textContent = hour24 ? (n = ｃａｌｌ (Date . prototype . getHours , now)) < 10 ? "0" + n : "" + n : !(n = ｃａｌｌ (Date.prototype.getHours , now) % 12) ? "12" : "" + n
+				sep . style . opacity = ｃａｌｌ (Date . prototype . getSeconds , now) % 2 ? "0" : "1"
+				minutes . textContent = (n = ｃａｌｌ (Date . prototype . getMinutes , now)) < 10 ? "0" + n : n
+				suffix . textContent = hour24 ? "" : ｃａｌｌ (Date . prototype . getHours , now) < 12 ? " AM" : " PM"
+				datetime . title = ｃａｌｌ (Date . prototype . toString , now)
+				datetime . datetime = ｃａｌｌ (Date . prototype . toISOString , now)
+				ｃａｌｌ (window.setTimeout , window , ｂｉｎｄ (window . requestAnimationFrame , window , updateTime) , 1000)
 			}
 			var scroll_waiting = ｎｏ
 			var input_waiting = ｎｏ
 			var i = 0
-			updateFont (0)
-			updateTheme (0)
-			ｄｏ (updateInput)
-			ｄｏ (updateTime)
-			content . addEventListener ("scroll" , function () {
-				if (scroll_waiting) return
-				scroll_waiting = ｙｅｓ
-				requestAnimationFrame (function () {
-					ｄｏ (updateBackground)
-					scroll_waiting = ｎｏ
-				})
+			ｃａｌｌ (updateFont , null , 0)
+			ｃａｌｌ (updateTheme , null , 0)
+			ｃａｌｌ (updateInput)
+			ｃａｌｌ (updateTime)
+			ｃａｌｌ (content . addEventListener , content , "scroll" , function () {
+				scroll_waiting ? void{} : function () {
+					scroll_waiting = ｙｅｓ
+					ｃａｌｌ (window . requestAnimationFrame , window , function () {
+						ｃａｌｌ (updateBackground)
+						scroll_waiting = ｎｏ
+					})
+				} ()
 			})
-			for (i = 0 ; i < font_buttons . length ; i++) void function (index) { font_buttons [i] . addEventListener ("click", function () { updateFont (index) }) } (i)
-			themer . addEventListener ("click", toggleThemeMenu)
-			for (i = 0 ; i < themes . length ; i++) void function (index) { theme_buttons [i] . addEventListener ("click", function () { updateTheme (index) }) } (i)
-			content . addEventListener ("input" , function () {
-				if (input_waiting) return
-				input_waiting = ｙｅｓ
-				requestAnimationFrame (function () {
-					ｄｏ (updateInput)
-					input_waiting = ｎｏ
-				})
+			for (i = 0 ; i < font_buttons . length ; i++) { void function (index) { ｃａｌｌ (font_buttons [i] . addEventListener , font_buttons [i] , "click" , ｂｉｎｄ (updateFont , null , index)) } (i) }
+			ｃａｌｌ (themer . addEventListener , themer , "click" , toggleThemeMenu)
+			ｃａｌｌ (datetime . addEventListener , datetime , "click" , toggle24Hour)
+			ｃａｌｌ (clear . addEventListener , clear , "click" , function () {
+				content . value = ''
+				ｃａｌｌ (updateInput)
 			})
-			content . addEventListener ("focus" , function () { toggleThemeMenu (ｎｏ) })
-			upload . addEventListener ("change", function () {
+			for (i = 0 ; i < themes . length ; i++) { void function (index) { ｃａｌｌ (theme_buttons [i] . addEventListener , theme_buttons [i] , "click" , ｂｉｎｄ (updateTheme , null , index)) } (i) }
+			ｃａｌｌ (content . addEventListener , content , "input" , function () {
+				input_waiting ? void{} : function () {
+					input_waiting = ｙｅｓ
+					ｃａｌｌ (window . requestAnimationFrame , window , function () {
+						ｃａｌｌ (updateInput)
+						input_waiting = ｎｏ
+					})
+				} ()
+			})
+			ｃａｌｌ (content . addEventListener , content , "focus" , ｂｉｎｄ (toggleThemeMenu , null , ｎｏ))
+			ｃａｌｌ (upload . addEventListener , upload , "change" , function () {
 				var reader = new FileReader
-				reader . addEventListener ("loadend", function () {
+				ｃａｌｌ (reader . addEventListener , reader , "loadend" , function () {
 					content . value = reader . result
-					ｄｏ (updateInput)
+					ｃａｌｌ (updateInput)
 				})
-				if (this . files && this . files [0]) reader . readAsText (this . files [0])
+				this . files && this . files [0] ? ｃａｌｌ (reader . readAsText , reader , this . files [0]) : void{}
 				this . value = null
 			})
 		} ()
-	</script>
+	</SCRIPT>
 
 	<!--  EOF  -->

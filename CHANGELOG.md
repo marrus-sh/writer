@@ -2,6 +2,21 @@
 
 ##  Version 0  ##
 
+###  0.3:
+
+####  0.3.0
+
+#####  NEW.
+
++ "Clear document" button ([Issue #6](https://github.com/marrus-sh/writer/issues/6)).
++ `accesskey`s added (these only work when the text area is not focused) ([Issue #2](https://github.com/marrus-sh/writer/issues/2)).
+
+#####  CHANGED.
+
+* HTML has been cleaned up slightly and buttons are now better-defined.
+* Time is now 12-hour by default, but can be clicked to switch to 24-hour ([Issue #19](https://github.com/marrus-sh/writer/issues/19)).
+* Wrapping is disabled on the topbar ([Issue #16](https://github.com/marrus-sh/writer/issues/16)).
+
 ###  0.2:
 
 ####  0.2.0
