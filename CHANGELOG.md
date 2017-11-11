@@ -4,6 +4,12 @@
 
 ###  0.3:
 
+####  0.3.1
+
+#####  CHANGED.
+
+* Fixed `white-space` on theme selector.
+
 ####  0.3.0
 
 #####  NEW.
