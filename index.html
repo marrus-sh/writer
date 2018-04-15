@@ -54,6 +54,7 @@
 		Width: 100%;
 		Max-Width: 31EM;
 		Height: 100%;
+		Overflow: Visible;
 		Resize: None;
 	}
 
@@ -299,6 +300,11 @@
 		White-Space: NoWrap;
 		Overflow: Hidden;
 		Text-Overflow: Ellipsis;
+		Cursor: Default;
+		-Webkit-User-Select: None;
+		-Moz-User-Select: None;
+		-MS-User-Select: None;
+		User-Select: None;
 	}
 	#meta::BEFORE,
 	#meta::AFTER {
@@ -313,11 +319,25 @@
 		Border-Color: CurrentColor;
 		Border-Style: None Solid None None;
 		Padding: 0;
-		Color: Inherit;
-		Background: None;
 		Width: 0;
 		Height: 100%;
+		Color: Inherit;
+		Background: None;
 		Vertical-Align: Top;
+	}
+	#meta OPTION,
+	#meta SELECT {
+		Display: Inline-Block;
+		Box-Sizing: Border-Box;
+		Margin: 0;
+		Border: None;
+		Padding: 0;
+		Width: 6EM;
+		Height: 1.35EM;
+		Color: Inherit;
+		Background: Black;
+		Font: Inherit;
+		Text-Overflow: Ellipsis;
 	}
 
 </STYLE>
@@ -327,7 +347,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: AliceBlue;
 		Background: SteelBlue;
 	}
@@ -351,7 +373,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: AliceBlue;
 		Background: SteelBlue;
 	}
@@ -375,7 +399,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #f3dee3;
 		Background: #700020;
 	}
@@ -399,7 +425,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: PapayaWhip;
 		Background: DarkOrange;
 	}
@@ -423,7 +451,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: LavenderBlush;
 		Background: DeepPink;
 	}
@@ -449,7 +479,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: black;
 		Background: #777899;
 	}
@@ -480,7 +512,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #FFF8E3;
 		Background: #336633;
 	}
@@ -511,7 +545,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #000000;
 		Background: #BB0033;
 	}
@@ -547,7 +583,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #EEEEEE;
 		Background: #000000;
 	}
@@ -582,7 +620,9 @@
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
 	#menu HR,
-	#meta {
+	#meta,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #275D9B;
 		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #FFFFFF;
 	}
@@ -648,7 +688,9 @@
 	}
 	#menu *.ITEM,
 	#menu *.POPUP *.ITEM[Aria-Checked="true"],
-	#menu HR {
+	#menu HR,
+	#meta OPTION,
+	#meta SELECT {
 		Color: #888;
 		Background: Transparent;
 	}
@@ -679,11 +721,11 @@
 	<!--  Topbar  -->
 	<DIV Id=menu Role=menubar Hidden><!--
 		--><DIV Id=menu.fonts Role=group Title=Fonts><!--
-			--><BUTTON Id=menu.fonts.sans Class=ITEM Type=button Role=menuitemradio Title=Sans-serif Aria-Checked=true Style=Font-Family:Sans-Serif AccessKey=1></BUTTON><!--
-			--><BUTTON Id=menu.fonts.serif Class=ITEM Type=button Role=menuitemradio Title=Serif Aria-Checked=false Style=Font-Family:Serif AccessKey=2></BUTTON><!--
-			--><BUTTON Id=menu.fonts.cursive Class=ITEM Type=button Role=menuitemradio Title=Cursive Aria-Checked=false Style=Font-Family:Cursive AccessKey=3></BUTTON><!--
-			--><BUTTON Id=menu.fonts.monospace Class=ITEM Type=button Role=menuitemradio Title=Monospace Aria-Checked=false Style=Font-Family:Monospace AccessKey=4></BUTTON><!--
-			--><BUTTON Id=menu.fonts.fantasy Class=ITEM Type=button Role=menuitemradio Title=Fantasy Aria-Checked=false Style=Font-Family:Fantasy AccessKey=5></BUTTON><!--
+			--><BUTTON Id=menu.fonts.sans Class=ITEM Type=button Role=menuitemradio Title=Sans-serif Aria-Checked=true Style=Font-Family:Sans-Serif,&quot;Unifont&#x20;LANGDEV&quot; AccessKey=1></BUTTON><!--
+			--><BUTTON Id=menu.fonts.serif Class=ITEM Type=button Role=menuitemradio Title=Serif Aria-Checked=false Style=Font-Family:Serif,&quot;Unifont&#x20;LANGDEV&quot; AccessKey=2></BUTTON><!--
+			--><BUTTON Id=menu.fonts.cursive Class=ITEM Type=button Role=menuitemradio Title=Cursive Aria-Checked=false Style=Font-Family:Cursive,&quot;Unifont&#x20;LANGDEV&quot; AccessKey=3></BUTTON><!--
+			--><BUTTON Id=menu.fonts.monospace Class=ITEM Type=button Role=menuitemradio Title=Monospace Aria-Checked=false Style=Font-Family:Monospace,&quot;Unifont&#x20;LANGDEV&quot; AccessKey=4></BUTTON><!--
+			--><BUTTON Id=menu.fonts.fantasy Class=ITEM Type=button Role=menuitemradio Title=Fantasy Aria-Checked=false Style=Font-Family:Fantasy,&quot;Unifont&#x20;LANGDEV&quot; AccessKey=5></BUTTON><!--
 		--></DIV><!--
 		--><HR><!--
 		--><DIV Id=menu.themes Class=ITEM Role=menuitemcheckbox Title=Show&#x20;themes Aria-Checked=false Aria-HasPopup=true TabIndex=0><!--
@@ -737,6 +779,8 @@
 		--></TIME><!--
 		--><HR><!--
 		--><SPAN Id=meta.wordcount>??? characters, ??? words</SPAN><!--
+		--><HR><!--
+		--><SELECT Id=meta.input Title=Input&#x20;method AccessKey=p><OPTION Title=Bencode>Bkde<OPTION Title=Latin Selected>Latn<OPTION Title=Sevensi>Sevi<OPTION Title=Runic&#x20;Sevensi>Sevr<OPTION Title=Classical&#x20;Sevensi&#x20;Latin>osv-Latn</SELECT><!--
 	--></ASIDE>
 
 </DIV>
@@ -752,7 +796,7 @@
 		function bind (t) { return function (fn, args) { return function () { return fn.apply(t , args) } }.call(null , this , Arr$.slice.call(arguments , 1)) }
 
 		/*  Variables  */
-		var Arr$ = this.Array.prototype , Aud$ = typeof this.Audio === "function" ? this.Audio.prototype : null , Dat$ = this.Date.prototype , Doc$ = this.Document.prototype , Elt$ = this.Element.prototype , Str$ = this.String.prototype , audio = typeof this.Audio === "function" ? new this.Audio : null , audio_menu = get.call("menu.audio") , audio_popup = get.call("menu.audio.popup") , content = get.call("content") , datetime = get.call("meta.datetime") , download = get.call("menu.io.download") , fonts = ["sans" , "serif" , "cursive" , "monospace" , "fantasy"] , theme_menu = get.call("menu.themes") , theme_popup = get.call("menu.themes.popup") , theme_styler = get.call("style.selected") , themes = ["basic" , "wine" , "orange" , "pink" , "legendary" , "nleg" , "vampire", "o", "digital", "modern"] , track = -1 , tracklist = 0 , tracks = [null , ["https://archive.org/download/LUXXAr051402-01/01_-_The_Lights_Galaxia_-_E1_T4.mp3" , "https://archive.org/download/LUXXAr051402-01/02_-_The_Lights_Galaxia_-_E1_T1.mp3" , "https://archive.org/download/LUXXAr051402-01/03_-_The_Lights_Galaxia_-_E1_T2.mp3" , "https://archive.org/download/LUXXAr051402-01/04_-_The_Lights_Galaxia_-_E1_T5.mp3" , "https://archive.org/download/LUXXAr051402-01/05_-_The_Lights_Galaxia_-_E1_T3.mp3"] , ["https://archive.org/download/nineinchnails_ghosts_I_IV/01_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/02_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/03_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/04_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/05_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/06_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/07_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/08_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/09_Ghosts_I.mp3"] , ["https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_01_-_Rise_of_Space.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_02_-_Space_Party_Anthem.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_03_-_Gravity_in_Terms_of_Space-Time.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_04_-_Keplers_Star_Catalog.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_05_-_Future_and_It_Doesnt_Work.mp3"] , ["./rain.mp3"]] , upload = get.call("menu.io.upload") , writer = get.call("writer")
+		var Arr$ = this.Array.prototype , Aud$ = typeof this.Audio === "function" ? this.Audio.prototype : null , Dat$ = this.Date.prototype , Doc$ = this.Document.prototype , Elt$ = this.Element.prototype , Str$ = this.String.prototype , audio = typeof this.Audio === "function" ? new this.Audio : null , audio_menu = get.call("menu.audio") , audio_popup = get.call("menu.audio.popup") , content = get.call("content") , datetime = get.call("meta.datetime") , download = get.call("menu.io.download") , fonts = ["sans" , "serif" , "cursive" , "monospace" , "fantasy"] , input = get.call("meta.input") , theme_menu = get.call("menu.themes") , theme_popup = get.call("menu.themes.popup") , theme_styler = get.call("style.selected") , themes = ["basic" , "wine" , "orange" , "pink" , "legendary" , "nleg" , "vampire", "o", "digital", "modern"] , track = -1 , tracklist = 0 , tracks = [null , ["https://archive.org/download/LUXXAr051402-01/01_-_The_Lights_Galaxia_-_E1_T4.mp3" , "https://archive.org/download/LUXXAr051402-01/02_-_The_Lights_Galaxia_-_E1_T1.mp3" , "https://archive.org/download/LUXXAr051402-01/03_-_The_Lights_Galaxia_-_E1_T2.mp3" , "https://archive.org/download/LUXXAr051402-01/04_-_The_Lights_Galaxia_-_E1_T5.mp3" , "https://archive.org/download/LUXXAr051402-01/05_-_The_Lights_Galaxia_-_E1_T3.mp3"] , ["https://archive.org/download/nineinchnails_ghosts_I_IV/01_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/02_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/03_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/04_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/05_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/06_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/07_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/08_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/09_Ghosts_I.mp3"] , ["https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_01_-_Rise_of_Space.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_02_-_Space_Party_Anthem.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_03_-_Gravity_in_Terms_of_Space-Time.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_04_-_Keplers_Star_Catalog.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_05_-_Future_and_It_Doesnt_Work.mp3"] , ["./rain.mp3"]] , upload = get.call("menu.io.upload") , writer = get.call("writer")
 
 		/*  Element prototype shortcuts  */
 		var forget = Elt$.removeEventListener , getAttr = Elt$.getAttribute , listen = Elt$.addEventListener , rmvAttr = Elt$.removeAttribute , setAttr = Elt$.setAttribute
@@ -804,7 +848,30 @@
 		}
 		function initAndRun () {
 			var i, input_waiting = false , scroll_waiting = false
-			typeof window.initialize === "function" ? window.initialize.call(window) : void{} , updateFont.call(0) , updateTheme.call(themes[0]) , updateMeta.call() , updateTime.call(false) , updateAudio.call(0) , listen.call(content , "scroll" , function () { scroll_waiting ? void{} : function () { scroll_waiting = true , window.requestAnimationFrame.call(window , function () { updateBackground.call() , scroll_waiting = false }) }.call() } , false)
+			typeof window.initialize === "function" ? window.initialize.call(window) : void{} , updateFont.call(0) , updateTheme.call(themes[0]) , updateMeta.call() , updateTime.call(false) , updateAudio.call(0) , listen.call(content , "scroll" , function () { scroll_waiting ? void{} : function () { scroll_waiting = true , window.requestAnimationFrame.call(window , function () { updateBackground.call() , scroll_waiting = false }) }.call() } , false) , listen.call(content , "keypress" , function (e) {
+				var toStr = window.String.fromCharCode
+				var key = e.key ? e.key : toStr.call(window.String , e.keyCode) , i , map
+				switch (input.value) {
+					case "Bkde":
+						map = { "|":"\uDBC4\uDC1A" , ".":"\uDBC4\uDC1B" , ",":"\uDBC4\uDC1C" , "'":"\uDBC4\uDC1D" , "{":"\uDBC4\uDC1E" , "}":"\uDBC4\uDC1F" , "\\":"\uDBC4\uDC3A" , ":":"\uDBC4\uDC3B" , ";":"\uDBC4\uDC3C" , "-":"\uDBC4\uDC3D" , "<":"\uDBC4\uDC3E" , ">":"\uDBC4\uDC3F" , "(":"\uDBC4\uDC40" , ")":"\uDBC4\uDC41" , "[":"\uDBC4\uDC42" , "]":"\uDBC4\uDC43" , "!":"\uDBC4\uDC44" , "?":"\uDBC4\uDC45" }
+						for (i = 0 ; i < 26 ; i++) { map[toStr.call(window.String , 65 + i)] = "\uDBC4" + toStr.call(window.String , 56320 + i) , map[toStr.call(window.String , 97 + i)] = "\uDBC4" + toStr.call(window.String , 56352 + i) }
+						break
+					case "Sevr":
+						map = { Z:"\uDBC4\uDDE0" , R:"\uDBC4\uDDE1" , G:"\uDBC4\uDDE2" , Q:"\uDBC4\uDDE3" , H:"\uDBC4\uDDE4" , D:"\uDBC4\uDDE5" , Y:"\uDBC4\uDDE6" , V:"\uDBC4\uDDE7" , M:"\uDBC4\uDDE8" , B:"\uDBC4\uDDE9" , W:"\uDBC4\uDDEA" , N:"\uDBC4\uDDEB" , J:"\uDBC4\uDDEC" , "?":"\uDBC4\uDDED" , L:"\uDBC4\uDDEE" , S:"\uDBC4\uDDF0" , X:"\uDBC4\uDDF1" , K:"\uDBC4\uDDF2" , T:"\uDBC4\uDDF5" , F:"\uDBC4\uDDF7" , P:"\uDBC4\uDDF9" , C:"\uDBC4\uDDFC" , "|":"\uDBC4\uDDFE" , A:"" , E:"" , I:"" , O:"" , U:"" , z:"\uDBC4\uDDE0" , r:"\uDBC4\uDDE1" , g:"\uDBC4\uDDE2" , q:"\uDBC4\uDDE3" , h:"\uDBC4\uDDE4" , d:"\uDBC4\uDDE5" , y:"\uDBC4\uDDE6" , v:"\uDBC4\uDDE7" , m:"\uDBC4\uDDE8" , b:"\uDBC4\uDDE9" , w:"\uDBC4\uDDEA" , n:"\uDBC4\uDDEB" , j:"\uDBC4\uDDEC" , "/":"\uDBC4\uDDED" , l:"\uDBC4\uDDEE" , s:"\uDBC4\uDDF0" , x:"\uDBC4\uDDF1" , k:"\uDBC4\uDDF2" , t:"\uDBC4\uDDF5" , f:"\uDBC4\uDDF7" , p:"\uDBC4\uDDF9" , c:"\uDBC4\uDDFC" , "\\":"\uDBC4\uDDFE" , a:"" , e:"" , i:"" , o:"" , u:"" }
+						break
+					case "Sevi":
+						map = { "?":"\uDBC4\uDE00" , H:"\uDBC4\uDE01" , L:"\uDBC4\uDE02" , "|":"\uDBC4\uDE03" , G:"\uDBC4\uDE04" , R:"\uDBC4\uDE05" , D:"\uDBC4\uDE06" , Z:"\uDBC4\uDE07" , B:"\uDBC4\uDE08" , V:"\uDBC4\uDE09" , K:"\uDBC4\uDE0A" , X:"\uDBC4\uDE0B" , T:"\uDBC4\uDE0C" , S:"\uDBC4\uDE0D" , P:"\uDBC4\uDE0E" , F:"\uDBC4\uDE0F" , Q:"\uDBC4\uDE10" , Y:"\uDBC4\uDE11" , N:"\uDBC4\uDE12" , J:"\uDBC4\uDE13" , M:"\uDBC4\uDE14" , W:"\uDBC4\uDE15" , C:"\uDBC4\uDE16" , "+":"\uDBC4\uDE20" , _:"\uDBC4\uDE21" , A:"" , E:"" , I:"" , O:"" , U:"" , "\"":"\uDBC4\uDE22" , "~":"\uDBC4\uDE23" , "/":"\uDBC4\uDE00" , h:"\uDBC4\uDE01" , l:"\uDBC4\uDE02" , "\\":"\uDBC4\uDE03" , g:"\uDBC4\uDE04" , r:"\uDBC4\uDE05" , d:"\uDBC4\uDE06" , z:"\uDBC4\uDE07" , b:"\uDBC4\uDE08" , v:"\uDBC4\uDE09" , k:"\uDBC4\uDE0A" , x:"\uDBC4\uDE0B" , t:"\uDBC4\uDE0C" , s:"\uDBC4\uDE0D" , p:"\uDBC4\uDE0E" , f:"\uDBC4\uDE0F" , q:"\uDBC4\uDE10" , y:"\uDBC4\uDE11" , n:"\uDBC4\uDE12" , j:"\uDBC4\uDE13" , m:"\uDBC4\uDE14" , w:"\uDBC4\uDE15" , c:"\uDBC4\uDE16" , "=":"\uDBC4\uDE20" , "-":"\uDBC4\uDE21" , "'":"\uDBC4\uDE22" , "`":"\uDBC4\uDE23" , a:"" , e:"" , i:"" , o:"" , u:"" }
+						break
+					case "osv-Latn":
+						map = { "?":"Ɂ" , "/":"ɂ" , "|":"Λ̷" , "\\":"ƛ" , "{":"Æ" , "[":"æ" , "}":"Å" , "]":"å" , $:"?" , _:"/" , "=":"+" , "+":"*" , "`":"=" , "^":"&" , "&":"[" , "*":"]" }
+						break
+					default: return
+				}
+				key && !e.metaKey && !e.ctrlKey && map && (map[key] || map[key] === "") && typeof window.HTMLTextAreaElement.prototype.setSelectionRange === "function" ? function () {
+					var start = content.selectionStart
+					map[key] ? (content.value = Str$.substr.call(content.value, 0, content.selectionStart) + map[key] + Str$.substr.call(content.value, content.selectionEnd) , this.setSelectionRange.call(content , start + map[key].length , start + map[key].length)) : void{} , e.preventDefault()
+				}.call(window.HTMLTextAreaElement.prototype) : void{}
+			})
 			for (i = 0 ; i < fonts.length ; i++) { listen.call(get.call("menu.fonts." + fonts[i]) , "click" , bind.call(updateFont, i) , false) }
 			listen.call(audio_menu , "click" , toggleAudioMenu , false) , listen.call(theme_menu , "click" , toggleThemeMenu , false) , listen.call(datetime , "click" , toggle24Hour , false) , listen.call(get.call("menu.io.clear") , "click" , function () { content.value = "" , updateMeta.call() } , false)
 			for (i = 0 ; i < themes.length ; i++) { listen.call(get.call("menu.themes." + themes[i]) , "click" , bind.call(updateTheme , themes[i]) , false) }

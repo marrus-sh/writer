@@ -2,6 +2,24 @@
 
 ##  Version 0  ##
 
+###  0.5:
+
+####  0.5.0
+
+#####  NEW.
+
++ Input methods added, which map ASCII characters to [new codepoints](https://github.com/langdev-project/langdev-unicode) for inputing LANGDEV texts (requires [Unifont LANGDEV](https://github.com/langdev-project/unifont-langdev) or similar font):
+	+ `Latn` (default)
+	+ `Bkde` (Bencode)
+	+ `Sevr` (Runic Sevensi)
+	+ `Sevi` (Sevensi)
+	+ `osv-Latn` (Latin with additions for Sevensi romanization)
+
+#####  CHANGED.
+
+* The text in the bottom "meta" bar is no longer selectable.
+* Fixed an issue where the Electron app would sometimes have unnecessary scrollbars.
+
 ###  0.4:
 
 ####  0.4.0
