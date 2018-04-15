@@ -2,6 +2,31 @@
 
 ##  Version 0  ##
 
+###  0.4:
+
+####  0.4.0
+
+#####  NEW.
+
++ Music added (hosted via <https://archive.org/>):
+    + [MAAP Excursion One](https://archive.org/details/LUXXAr051402-01) [CC BY-NC-ND 3.0]
+    + [Ghosts I](https://archive.org/details/nineinchnails_ghosts_I_IV) [CC BY-NC-SA 3.0]
+    + [Future, and It Doesn't Work](https://archive.org/details/Future_and_It_Doesnt_Work-4777) [CC BY-NC-ND 3.0]
+    + rain.mp3 (Own work; from public domain sources) [CC0]
++ New themes:
+    + Old Vampire (minimal black + red)
+    + Digital (see <http://scoutshonour.com/digital/>)
+    + Modern (minimalist white)
++ Can now be run as an Electron app via `npm start`.
+
+#####  CHANGED.
+
+* Changes to code style.
+
+#####  REMOVED.
+
+- The old footer has been removed.
+
 ###  0.3:
 
 ####  0.3.1

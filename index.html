@@ -1,612 +1,825 @@
 <!DoCtYpE HtMl>
 
+<HTML Lang=en>
+
 <!--  Metadata content  -->
 <TITLE>KibiWriter</TITLE>
-<META charset="utf-8">
-<META name="viewport" content="width=device-width,initial-scale=1">
+<META Charset=utf-8>
+<META Name=viewport content=width&equals;device-width,initial-scale&equals;1>
 
 <!--  Core styling  -->
-<STYLE type="text/css">
+<STYLE>
+
+	/*  Page setup  */
+	BODY {
+		Display: Block;
+		Position: Absolute;
+		Top: 0;
+		Bottom: 0;
+		Left: 0;
+		Right: 0;
+		Margin: .675EM .5EM;
+		Border: None;
+		Padding: 0;
+		Color: Black;
+		Background: White;
+	}
 
 	/*  Application  */
-	BODY {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: .5em;
-		right: .5em;
-		margin: auto;
-		padding: 2.725em 0 6.25em;
-		width: auto;
-		max-width: 31em;
-		height: auto;
-		line-height: 1.35;
-		font-synthesis: none;
+	#writer {
+		Display: Block;
+		Position: Absolute;
+		Box-Sizing: Border-Box;
+		Top: 0;
+		Bottom: 0;
+		Left: 0;
+		Right: 0;
+		Margin: Auto;
+		Border: None;
+		Padding: 1.35EM 0;
+		Width: 27EM;
+		Max-Width: 100%;
+		Height: 29.7EM;
+		Max-Height: 100%;
+		Color: CurrentColor;
+		Background: White;
+		Background-Clip: Content-Box;
+		Line-Height: 1.35;
+		Font-Size: 1REM;  /*  Prevents changes in font size due to monospace, etc typeface  */
+		Font-Synthesis: None;
+		Overflow: Auto;
+		Resize: Both;
+	}
+	#writer.FIT {
+		Width: 100%;
+		Max-Width: 31EM;
+		Height: 100%;
+		Resize: None;
 	}
 
 	/*  Topbar  */
-	*[role="menubar"] {
-		display: block;
-		position: absolute;
-		top: .675em;
-		left: 0;
-		margin: 0;
-		border: none;
-		padding: 0;
-		width: auto;
-		height: 1.35em;
-		font-weight: bold;
-		white-space: nowrap;
+	#menu {
+		Display: Block;
+		Position: Absolute;
+		Top: 0;
+		Left: 0;
+		Margin: 0;
+		Border: None;
+		Padding: 0;
+		Width: Auto;
+		Color: White;
+		Font-Weight: Bold;
+		White-Space: NoWrap;
 	}
-	*[role="menubar"] *[role="group"] { display: inline-block }
-	*[role="menubar"] *.menu-item {
-		display: inline-block;
-		position: relative;
-		margin: 0;
-		border: none;
-		padding: 0;
-		width: 2rem;
-		height: 1.35rem;
-		color: inherit;
-		background: none;
-		font-size: inherit;
-		font-weight: inherit;
-		font-family: inherit;
-		line-height: 1.35rem;
-		text-align: center;
-		text-decoration: none;
-		vertical-align: top;
-		cursor: pointer;
+	#menu *[Role="group"] { Display: Inline-Block }
+	#menu *.ITEM {
+		Display: Inline-Block;
+		Position: Relative;
+		Width: 2EM;
+		Height: 1.35EM;
+		Margin: 0;
+		Border: None;
+		Padding: 0;
+		Color: White;
+		Background: Black;
+		Font: Inherit;
+		White-Space: NoWrap;
+		Text-Align: Center;
+		Text-Decoration: None;
+		Text-Overflow: Clip;
+		Vertical-Align: Top;
+		Cursor: Pointer;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item { border-left: thin currentColor solid }
-	*[role="menubar"] HR {
-		display: inline-block;
-		box-sizing: content-box;
-		margin: 0;
-		border-width: 0px thin;
-		border-color: currentColor;
-		border-style: none solid;
-		padding: 0;
-		color: inherit;
-		background: none;
-		width: 2px;
-		height: 1.35rem;
-		vertical-align: top;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: Black;
+		Background: White;
 	}
-	#theme-container {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 100%;
-		font-weight: normal;
-		white-space: normal;
-		overflow: hidden;
-		z-index: 100;
+	#menu > *.ITEM:First-Child,
+	#menu > *[Role="group"]:First-Child > *.ITEM:First-Child { Border-Radius: 1EX 0 0 0 }
+	#menu > *.ITEM:Last-Child,
+	#menu > *[Role="group"]:Last-Child > *.ITEM:Last-Child { Border-Radius: 0 1EX 0 0 }
+	#menu *.ITEM + *.ITEM { Border-Left: Thin CurrentColor Solid }
+	#menu HR {
+		Display: Inline-Block;
+		Box-Sizing: Content-Box;
+		Margin: 0;
+		Border-Width: 0 Thin;
+		Border-Color: CurrentColor;
+		Border-Style: None Solid;
+		Padding: 0;
+		Color: Inherit;
+		Background: None;
+		Width: 2PX;
+		Height: 1.35EM;
+		Vertical-Align: Top;
 	}
-	#theme-container *.menu-item { border: none }
-	#font-menu *.menu-item:first-child { border-radius: 1ex 0 0 0 }
-	#font-menu *.menu-item::after { content: "A" }
-	#theme-menu::after {
-		font-style: italic;
-		content: "T";
+	#menu *.POPUP {
+		Position: Absolute;
+		Top: 100%;
+		Left: -50%;
+		Right: -50%;
+		Margin: 0;
+		Border: None;
+		Padding: 0;
+		Font-Weight: Normal;
+		White-Space: Normal;
+		Text-Align: Center;
+		Overflow: Hidden;
+		Z-Index: 100;
 	}
-	#theme-menu *.menu-item[aria-checked="true"]::before, #theme-menu *.menu-item[aria-checked="true"]::after {
-		content: " · ";
+	#menu *.POPUP *.ROW {
+		Display: Inline-Block;
+		Margin: 0;
+		Border: None;
+		Padding: 0;
+		Width: 2EM;
+		Vertical-Align: Top;
 	}
-	#io-menu *.menu-item:last-child { border-radius: 0 1ex 0 0 }
-	#io-menu *.menu-item[title="Clear document"]::after { content: "✘" }
-	#io-menu *.menu-item[title="Upload"]::after { content: "⬆" }
-	#io-menu *.menu-item[title="Download"]::after { content: "⬇" }
+	#menu *.POPUP *.ITEM {
+		Display: Inline-Flex;
+		Justify-Content: Center;
+		Overflow: Hidden;
+	}
+	#menu *.POPUP *.ITEM + *.ITEM { Border: None }
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]::BEFORE,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]::AFTER { Content: " · " }
+	#menu\.fonts *.ITEM::AFTER { Content: "A" }
+	#menu\.themes::AFTER {
+		Font-Style: Italic;
+		Content: "T";
+	}
+	#menu\.audio::AFTER { Content: "♫" }
+	#menu\.io\.clear::AFTER { content: "✘" }
+	LABEL[For="menu.io.upload"]::AFTER { content: "⬆" }
+	#menu\.io\.download::AFTER { content: "⬇" }
 
 	/*  Theme buttons  */
-	#theme-menu #theme-basic {
-		color: AliceBlue;
-		background: SteelBlue;
+	#menu #menu\.themes\.basic {
+		Color: AliceBlue;
+		Background: SteelBlue;
 	}
-	#theme-menu #theme-basic:focus, #theme-basic:hover {
-		color: MidnightBlue;
-		background: LightSteelBlue;
-		outline: none;
+	#menu #menu\.themes\.basic:Focus,
+	#menu #menu\.themes\.basic:Hover {
+		Color: MidnightBlue;
+		Background: LightSteelBlue;
+		Outline: None;
 	}
-	#theme-menu #theme-wine {
-		color: #f3dee3;
-		background: #700020;
+	#menu #menu\.themes\.wine {
+		Color: #f3dee3;
+		Background: #700020;
 	}
-	#theme-menu #theme-wine:focus, #theme-wine:hover {
-		color: #97596b;
-		background: #f3dee3;
-		outline: none;
+	#menu #menu\.themes\.wine:Focus,
+	#menu #menu\.themes\.wine:Hover {
+		Color: #97596b;
+		Background: #f3dee3;
+		Outline: None;
 	}
-	#theme-menu #theme-orange {
-		color: PapayaWhip;
-		background: DarkOrange;
+	#menu #menu\.themes\.orange {
+		Color: PapayaWhip;
+		Background: DarkOrange;
 	}
-	#theme-menu #theme-orange:focus, #theme-orange:hover {
-		color: Orange;
-		background: PapayaWhip;
-		outline: none;
+	#menu #menu\.themes\.orange:Focus,
+	#menu #menu\.themes\.orange:Hover {
+		Color: Orange;
+		Background: PapayaWhip;
+		Outline: None;
 	}
-	#theme-menu #theme-pink {
-		color: LavenderBlush;
-		background: DeepPink;
+	#menu #menu\.themes\.pink {
+		Color: LavenderBlush;
+		Background: DeepPink;
 	}
-	#theme-menu #theme-pink:focus, #theme-pink:hover {
-		color: HotPink;
-		background: LavenderBlush;
-		outline: none;
+	#menu #menu\.themes\.pink:Focus,
+	#menu #menu\.themes\.pink:Hover {
+		Color: HotPink;
+		Background: LavenderBlush;
+		Outline: None;
 	}
-	#theme-menu #theme-legendary {
-		color: black;
-		background: #777899;
+	#menu #menu\.themes\.legendary {
+		Color: black;
+		Background: #777899;
 	}
-	#theme-menu #theme-legendary:focus, #theme-legendary:hover {
-		color: #001155;
-		background: #AAABBC;
-		outline: none;
+	#menu #menu\.themes\.legendary:Focus,
+	#menu #menu\.themes\.legendary:Hover {
+		Color: #001155;
+		Background: #AAABBC;
+		Outline: None;
 	}
-	#theme-menu #theme-nleg {
-		color: #FFF8E3;
-		background: #336633;
+	#menu #menu\.themes\.nleg {
+		Color: #FFF8E3;
+		Background: #336633;
 	}
-	#theme-menu #theme-nleg:focus, #theme-nleg:hover {
-		color: #FFF8E3;
-		background: #776335;
-		outline: none;
+	#menu #menu\.themes\.nleg:Focus,
+	#menu #menu\.themes\.nleg:Hover {
+		Color: #FFF8E3;
+		Background: #776335;
+		Outline: None;
 	}
-	#theme-menu #theme-vampire {
-		color: #EEEEEE;
-		background: #000000;
+	#menu #menu\.themes\.vampire {
+		Color: #EEEEEE;
+		Background: #000000;
 	}
-	#theme-menu #theme-vampire:focus, #theme-vampire:hover {
-		color: #220000;
-		background: #DEDEDE;
-		outline: none;
+	#menu #menu\.themes\.vampire:Focus,
+	#menu #menu\.themes\.vampire:Hover {
+		Color: #220000;
+		Background: #DEDEDE;
+		Outline: None;
+	}
+	#menu #menu\.themes\.o {
+		Color: #BB0033;
+		Background: #000000;
+	}
+	#menu #menu\.themes\.o:Focus,
+	#menu #menu\.themes\.o:Hover {
+		Color: #FF0000;
+		Background: #000000;
+		Outline: None;
+	}
+	#menu #menu\.themes\.digital {
+		Color: #FFFFFF;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #275D9B;
+		Font-Family: Monospace;
+		Font-Weight: Bold;
+	}
+	#menu #menu\.themes\.digital:Focus,
+	#menu #menu\.themes\.digital:Hover {
+		Color: #929292;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #275D9B;
+		Outline: None;
+	}
+	#menu #menu\.themes\.modern {
+		Color: #4D4D4D;
+		Background: #FAFAFA;
+		Font-Family: Sans-Serif;
+		Font-Weight: 300;
+	}
+	#menu #menu\.themes\.modern:Focus,
+	#menu #menu\.themes\.modern:Hover {
+		Color: #333333;
+		Background: #ffffff;
+		Outline: None;
 	}
 
 	/*  Content  */
 	#content {
-		display: block;
-		position: relative;
-		margin: 0;
-		border: none;
-		padding: 0;
-		width: 100%;
-		height: 100%;
-		color: inherit;
-		background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, currentColor 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white
-		font-size: inherit;
-		font-family: inherit;
-		line-height: inherit;
-		white-space: pre-wrap;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		resize: none;
+		Display: Inline-Block;
+		Position: Relative;
+		Box-Sizing: Border-Box;
+		Margin: Auto;
+		Border: None;
+		Padding: .675EM 0;
+		Width: 100%;
+		Height: 100%;
+		Color: Inherit;
+		Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, CurrentColor 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White;
+		Font: Inherit;
+		White-Space: Pre-Wrap;
+		Overflow-X: Hidden;
+		Overflow-Y: Scroll;
+		Resize: None;
 	}
-	#content:focus {
-		outline: none;
+	#content:Focus {
+		Outline: None;
 	}
 
 	/*  Bottombar  */
-	ASIDE {
-		display: block;
-		position: absolute;
-		bottom: 4.225em;
-		left: 0;
-		margin: 0;
-		border: none;
-		border-radius: 0 0 1ex 1ex;
-		padding: 0;
-		width: auto;
-		max-width: 100%;
-		height: 1.35em;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	#meta {
+		Display: Block;
+		Position: Absolute;
+		Bottom: 0;
+		Left: 0;
+		Margin: 0;
+		Border: None;
+		Border-Radius: 0 0 1EX 1EX;
+		Padding: 0;
+		Width: Auto;
+		Max-Width: 100%;
+		Height: 1.35EM;
+		Color: White;
+		Background: Black;
+		White-Space: NoWrap;
+		Overflow: Hidden;
+		Text-Overflow: Ellipsis;
 	}
-	ASIDE::before, ASIDE::after {
-		display: inline-block;
-		width: .35em;
-		content: "";
+	#meta::BEFORE,
+	#meta::AFTER {
+		Display: Inline-Block;
+		Width: .35EM;
+		Content: "";
 	}
-	ASIDE HR {
-		display: inline-block;
-		margin: 0 .35em;
-		border-width: 0px thin 0px 0px;
-		border-color: currentColor;
-		border-style: none solid none none;
-		padding: 0;
-		color: inherit;
-		background: none;
-		width: 0;
-		height: 100%;
-		vertical-align: top;
-	}
-
-	/*  Footer  */
-	FOOTER {
-		display: block;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: 1em 0;
-		border: none;
-		height: 2.7em;
-		font-family: serif;
-		font-size: .75em;
-		line-height: 1.35;
-		text-align: right;
-		white-space: nowrap;
-	}
-	FOOTER *[role="link"], FOOTER A[href] {
-		font-style: italic;
-		color: inherit;
-		text-decoration: underline;
-		text-decoration-style: dashed;
-		cursor: pointer;
-	}
-
-	/*  Small screens  */
-	@media screen and (max-height: 25em) {
-		BODY { padding: 2.725em 0 }
-		ASIDE { bottom: .675em }
-		FOOTER { display: none }
+	#meta HR {
+		Display: Inline-Block;
+		Margin: 0 .35EM;
+		Border-Width: 0 Thin 0 0;
+		Border-Color: CurrentColor;
+		Border-Style: None Solid None None;
+		Padding: 0;
+		Color: Inherit;
+		Background: None;
+		Width: 0;
+		Height: 100%;
+		Vertical-Align: Top;
 	}
 
 </STYLE>
 
-<STYLE id="style-selected" type="text/css" title="Selected Style">
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: AliceBlue;
-		background: SteelBlue;
+<!--  Themes  -->
+<STYLE Id=style.selected Title=Selected&#x20;Style>
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: AliceBlue;
+		Background: SteelBlue;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: MidnightBlue;
-		background: LightSteelBlue;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: MidnightBlue;
+		Background: LightSteelBlue;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: MidnightBlue;
-		background: AliceBlue;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: MidnightBlue;
+		Background: AliceBlue;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item { border-color: AliceBlue }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
-	footer { color: SteelBlue }
-	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: AliceBlue }
+	#content { Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, SteelBlue 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White }
 </STYLE>
-
-<STYLE id="style-basic" type="text/css" title="Basic">
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: AliceBlue;
-		background: SteelBlue;
+<STYLE Id=style.basic Title=Basic>
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: AliceBlue;
+		Background: SteelBlue;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: MidnightBlue;
-		background: LightSteelBlue;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: MidnightBlue;
+		Background: LightSteelBlue;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: MidnightBlue;
-		background: AliceBlue;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: MidnightBlue;
+		Background: AliceBlue;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: AliceBlue }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, SteelBlue 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
-	footer { color: SteelBlue }
-	footer *[role="link"]:hover, footer a[href]:hover { color: MidnightBlue }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: AliceBlue }
+	#content { Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, SteelBlue 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White }
 </STYLE>
-
-<STYLE id="style-wine" type="text/css" title="Wine">
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: #f3dee3;
-		background: #700020;
+<STYLE Id=style.wine Title=Wine>
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: #f3dee3;
+		Background: #700020;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: #97596b;
-		background: #f3dee3;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #97596b;
+		Background: #f3dee3;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: #700020;
-		background: #f3dee3;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #700020;
+		Background: #f3dee3;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #d6c6c9 }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, #992244 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
-	footer { color: #97596b }
-	footer *[role="link"]:hover, footer a[href]:hover { color: #700020 }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #d6c6c9 }
+	#content { Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, #992244 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White }
 </STYLE>
-
-<STYLE id="style-orange" type="text/css" title="Orange">
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: PapayaWhip;
-		background: DarkOrange;
+<STYLE Id=style.orange Title=Orange>
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: PapayaWhip;
+		Background: DarkOrange;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: Orange;
-		background: PapayaWhip;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: Orange;
+		Background: PapayaWhip;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: DarkOrange;
-		background: PapayaWhip;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: DarkOrange;
+		Background: PapayaWhip;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: PapayaWhip }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, Orange 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
-	footer { color: DarkOrange }
-	footer *[role="link"]:hover, footer a[href]:hover { color: Orange }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: PapayaWhip }
+	#content { Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, Orange 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White }
 </STYLE>
-
-<STYLE id="style-pink" type="text/css" title="Pink">
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: LavenderBlush;
-		background: DeepPink;
+<STYLE Id=style.pink Title=Pink>
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: LavenderBlush;
+		Background: DeepPink;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: HotPink;
-		background: LavenderBlush;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: HotPink;
+		Background: LavenderBlush;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: DeepPink;
-		background: LavenderBlush;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: DeepPink;
+		Background: LavenderBlush;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: LavenderBlush }
-	#content { background: repeating-linear-gradient(to right, white, white .075em, transparent .075em, transparent .225em, white .225em, white .3em), linear-gradient(to top, HotPink 1px, transparent 1px) top left / auto 1.35em repeat padding-box, white }
-	footer { color: HotPink }
-	footer *[role="link"]:hover, footer a[href]:hover { color: DeepPink }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: LavenderBlush }
+	#content { Background: repeating-linear-gradient(To Right, White, White .075EM, Transparent .075EM, Transparent .225EM, White .225EM, White .3EM), linear-gradient(To Top, HotPink 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, White }
 </STYLE>
-
-<STYLE id="style-legendary" type="text/css" title="Legendary">
-	body { background: #999ABC }
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: black;
-		background: #777899;
+<STYLE Id=style.legendary Title=Legendary>
+	BODY,
+	#writer { Background: #999ABC }
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: black;
+		Background: #777899;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: #001155;
-		background: #AAABBC;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #001155;
+		Background: #AAABBC;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: black;
-		background: #EEE8DD;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: black;
+		Background: #EEE8DD;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #001155 }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #001155 }
 	#content {
-		margin: -.675em 0;
-		border: 1px #545454 solid;
-		padding: calc(.675em - 1px) calc(1em - 1px);
-		width: calc(100% - 2em);
-		height: 100%;
-		color: #334566;
-		background: repeating-linear-gradient(to right, #EEEEEE, #EEEEEE .075em, transparent .075em, transparent .225em, #EEEEEE .225em, #EEEEEE .3em), linear-gradient(to top, #334566 1px, transparent 1px) top left / auto 1.35em repeat content-box, #EEEEEE;
+		Border: 1PX #220000 Solid;
+		Padding: calc(.675EM - 1PX) calc(1EM - 1PX);
+		Color: #334566;
+		Background: repeating-linear-gradient(To Right, #EEEEEE, #EEEEEE .075EM, Transparent .075EM, Transparent .225EM, #EEEEEE .225EM, #EEEEEE .3EM), linear-gradient(To Top, #334566 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, #EEEEEE;
 	}
-	footer { color: #334566 }
-	footer *[role="link"]:hover, footer a[href]:hover { color: #001155 }
 </STYLE>
-
-<STYLE id="style-nleg" type="text/css" title="New Legendary">
-	body { background: #FFF8E3 }
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: #FFF8E3;
-		background: #336633;
+<STYLE Id=style.nleg Title=New&#x20;Legendary>
+	BODY,
+	#writer { Background: #FFF8E3 }
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: #FFF8E3;
+		Background: #336633;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: #FFF8E3;
-		background: #776335;
-		outline: none;
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #FFF8E3;
+		Background: #776335;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: #776335;
-		background: #EEDDBF;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #776335;
+		Background: #EEDDBF;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #FFF8E3 }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #FFF8E3 }
 	#content {
-		margin: -.675em 0;
-		border: 1px #AA9F7F solid;
-		padding: calc(.675em - 1px) calc(1em - 1px);
-		width: calc(100% - 2em);
-		height: 100%;
-		color: #332714;
-		background: repeating-linear-gradient(to right, #EEDDBF, #EEDDBF .075em, transparent .075em, transparent .225em, #EEDDBF .225em, #EEDDBF .3em), linear-gradient(to top, #887256 1px, transparent 1px) top left / auto 1.35em repeat content-box, #EEDDBF;
+		Border: 1PX #220000 Solid;
+		Padding: calc(.675EM - 1PX) calc(1EM - 1PX);
+		Color: #332714;
+		Background: repeating-linear-gradient(To Right, #EEDDBF, #EEDDBF .075EM, Transparent .075EM, Transparent .225EM, #EEDDBF .225EM, #EEDDBF .3EM), linear-gradient(To Top, #887256 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, #EEDDBF;
 	}
-	footer { color: #443628 }
-	footer *[role="link"]:hover, footer a[href]:hover { color: #776335 }
 </STYLE>
-
-<STYLE id="style-vampire" type="text/css" title="Vampire">
-	body { background: #222222 }
-	aside, *[role="menubar"] *.menu-item, *[role="menubar"] hr {
-		color: #EEEEEE;
-		background: #000000;
+<STYLE Id=style.o Title=Old&#x20;Vampire>
+	BODY,
+	#writer { Background: #000000 }
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: #000000;
+		Background: #BB0033;
 	}
-	*[role="menubar"] *.menu-item:focus, *[role="menubar"] *.menu-item:hover {
-		color: #220000;
-		background: #DEDEDE;
-		outline: none;
+	#menu > *.ITEM:First-Child,
+	#menu > *[Role="group"]:First-Child > *.ITEM:First-Child,
+	#menu > *.ITEM:Last-Child,
+	#menu > *[Role="group"]:Last-Child > *.ITEM:Last-Child,
+	#meta { Border-Radius: 0 }
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #000000;
+		Background: #FF0000;
+		Outline: None;
 	}
-	*[role="menubar"] *.menu-item[aria-checked="true"] {
-		color: #DEDEDE;
-		background: #550022;
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #FF0000;
+		Background: #000000;
 	}
-	*[role="menubar"] *.menu-item + *.menu-item, *[role="menubar"] hr { border-color: #DEDEDE }
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #000000 }
 	#content {
-		margin: -.675em 0;
-		border: 1px #220000 solid;
-		padding: calc(.675em - 1px) calc(1em - 1px);
-		width: calc(100% - 2em);
-		height: 100%;
-		color: #BB99AA;
-		background: repeating-linear-gradient(to right, #131313, #131313 .075em, transparent .075em, transparent .225em, #131313 .225em, #131313 .3em), linear-gradient(to top, #550022 1px, transparent 1px) top left / auto 1.35em repeat content-box, #131313;
+		Border: 1PX CurrentColor Solid;
+		Padding: calc(.675EM - 1PX) calc(1EM - 1PX);
+		Color: #BB0033;
+		Background: #000000;
 	}
-	footer { color: #BCBCBC }
-	footer *[role="link"]:hover, footer a[href]:hover { color: #DEDEDE }
+</STYLE>
+<STYLE Id=style.vampire Title=Vampire>
+	BODY,
+	#writer { Background: #222222 }
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: #EEEEEE;
+		Background: #000000;
+	}
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #220000;
+		Background: #DEDEDE;
+		Outline: None;
+	}
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #DEDEDE;
+		Background: #550022;
+	}
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #DEDEDE }
+	#content {
+		Border: 1PX #220000 Solid;
+		Padding: calc(.675EM - 1PX) calc(1EM - 1PX);
+		Color: #BB99AA;
+		Background: repeating-linear-gradient(To Right, #131313, #131313 .075EM, Transparent .075EM, Transparent .225EM, #131313 .225EM, #131313 .3EM), linear-gradient(To Top, #550022 1PX, Transparent 1PX) Top Left / Auto 1.35EM Repeat Content-Box, #131313;
+	}
+</STYLE>
+<STYLE Id=style.digital Title=Digital>
+	BODY { Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #1D487A }
+	#writer {
+		Background: Transparent;
+		Font-Family: Monospace;
+		Font-Weight: Bold;
+	}
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR,
+	#meta {
+		Color: #275D9B;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #FFFFFF;
+	}
+	#menu > *.ITEM:First-Child,
+	#menu > *[Role="group"]:First-Child > *.ITEM:First-Child,
+	#menu > *.ITEM:Last-Child,
+	#menu > *[Role="group"]:Last-Child > *.ITEM:Last-Child,
+	#meta { Border-Radius: 0 }
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #275D9B;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #929292;
+		Outline: None;
+	}
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #FFFFFF;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #275D9B;
+	}
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #275D9B }
+	#content {
+		Border: 3PX #FFFFFF Solid;
+		Padding: calc(.675EM - 3PX) calc(1EM - 3PX);
+		Color: #FFFFFF;
+		Background: linear-gradient(To Bottom, rgba(0, 0, 0, .15) 1PX, rgba(0, 0, 0, 0) 1PX, rgba(0, 0, 0, 0) 3PX, rgba(0, 0, 0, .15) 3PX) Fixed Top Left / Auto 4PX Repeat, #275D9B;
+	}
+</STYLE>
+<STYLE Id=style.modern Title=Modern>
+	BODY {
+		Display: Flex;
+		Flex-Direction: Column;
+		Justify-Content: Space-Around;
+		Align-Items: Center;
+		Margin: 0;
+		Padding: 2.025EM .5EM 2.5EM;
+		Background: #FAFAFA;
+	}
+	BODY::AFTER { Content: "" }
+	#writer {
+		Position: Static;
+		Margin: -1PX;
+		Border: 1PX #D6D6D6 Dashed;
+		Padding: 0;
+		Background: Transparent;
+		Font-Family: Sans-Serif;
+		Font-Weight: 300;
+		Overflow: Hidden;
+	}
+	#menu {
+		Right: 0;
+		Border-Bottom: 1PX #D6D6D6 Solid;
+		Background: rgba(255, 255, 255, .95);
+		Text-Align: Center;
+	}
+	#meta {
+		Bottom: .675EM;
+		Right: 0;
+		Color: #888;
+		Background: Transparent;
+		Text-Align: Center;
+	}
+	#menu *.ITEM,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"],
+	#menu HR {
+		Color: #888;
+		Background: Transparent;
+	}
+	#menu *.ITEM:Focus,
+	#menu *.ITEM:Hover,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Focus,
+	#menu *.POPUP *.ITEM[Aria-Checked="true"]:Hover {
+		Color: #4D4D4D;
+		Background: Transparent;
+		Outline: None;
+	}
+	#menu *.ITEM[Aria-Checked="true"] {
+		Color: #333333;
+		Background: Transparent;
+	}
+	#menu *.ITEM + *.ITEM,
+	#menu HR { Border-Color: #D6D6D6 }
+	#menu *.POPUP *.ROW { Background: rgba(255, 255, 255, .95) }
+	#content {
+		Padding: 0;
+		Background: Transparent;
+	}
 </STYLE>
 
 <!--  Application  -->
-<BODY role="application">
+<DIV Id=writer Role=application>
 
 	<!--  Topbar  -->
-	<DIV role="menubar">
-		<DIV id="font-menu" role="group" title="Fonts">
-			<BUTTON id="font-sans" class="menu-item" type="button" role="menuitemradio" title="Sans-serif" aria-checked="true" style="font-family: sans-serif" accesskey="1"></BUTTON><BUTTON id="font-serif" class="menu-item" type="button" role="menuitemradio" title="Serif" aria-checked="false" style="font-family: serif" accesskey="2"></BUTTON><BUTTON id="font-cursive" class="menu-item" type="button" role="menuitemradio" title="Cursive" aria-checked="false" style="font-family: cursive" accesskey="3"></BUTTON><BUTTON id="font-monospace" class="menu-item" type="button" role="menuitemradio" title="Monospace" aria-checked="false" style="font-family: monospace" accesskey="4"></BUTTON><BUTTON id="font-fantasy" class="menu-item" type="button" role="menuitemradio" title="Fantasy" aria-checked="false" style="font-family: fantasy" accesskey="5"></BUTTON>
-		</DIV><HR><DIV id="theme-menu" class="menu-item" role="menuitemcheckbox" title="Show themes" aria-checked="false" aria-haspopup="true" tabindex="0">
-			<DIV id="theme-container" role="menu" hidden>
-				<BUTTON id="theme-basic" class="menu-item" type="button" role="menuitemradio" title="Basic theme" aria-checked="true">1</BUTTON><BUTTON id="theme-wine" class="menu-item" type="button" role="menuitemradio" title="Wine theme" aria-checked="false">2</BUTTON><BUTTON id="theme-orange" class="menu-item" type="button" role="menuitemradio" title="Orange theme" aria-checked="false">3</BUTTON><BUTTON id="theme-pink" class="menu-item" type="button" role="menuitemradio" title="Pink theme" aria-checked="false">4</BUTTON><BUTTON id="theme-legendary" class="menu-item" type="button" role="menuitemradio" title="Legendary theme" aria-checked="false">5</BUTTON><BUTTON id="theme-nleg" class="menu-item" type="button" role="menuitemradio" title="New legendary theme" aria-checked="false">6</BUTTON><BUTTON id="theme-vampire" class="menu-item" type="button" role="menuitemradio" title="Vampire theme" aria-checked="false">7</BUTTON>
-			</DIV>
-		</DIV><HR><DIV id="io-menu" role="group">
-			<BUTTON id="io-clear" class="menu-item" type="button" title="Clear document" accesskey="w"></BUTTON><LABEL class="menu-item" for="io-upload" title="Upload" tabindex="0" accesskey="o"><INPUT id="io-upload" type="file" style="display: none"></LABEL><A id="io-download" class="menu-item" role="menuitem" title="Download" download="My Document.txt" accesskey="s"></A>
-		</DIV>
-	</DIV>
+	<DIV Id=menu Role=menubar Hidden><!--
+		--><DIV Id=menu.fonts Role=group Title=Fonts><!--
+			--><BUTTON Id=menu.fonts.sans Class=ITEM Type=button Role=menuitemradio Title=Sans-serif Aria-Checked=true Style=Font-Family:Sans-Serif AccessKey=1></BUTTON><!--
+			--><BUTTON Id=menu.fonts.serif Class=ITEM Type=button Role=menuitemradio Title=Serif Aria-Checked=false Style=Font-Family:Serif AccessKey=2></BUTTON><!--
+			--><BUTTON Id=menu.fonts.cursive Class=ITEM Type=button Role=menuitemradio Title=Cursive Aria-Checked=false Style=Font-Family:Cursive AccessKey=3></BUTTON><!--
+			--><BUTTON Id=menu.fonts.monospace Class=ITEM Type=button Role=menuitemradio Title=Monospace Aria-Checked=false Style=Font-Family:Monospace AccessKey=4></BUTTON><!--
+			--><BUTTON Id=menu.fonts.fantasy Class=ITEM Type=button Role=menuitemradio Title=Fantasy Aria-Checked=false Style=Font-Family:Fantasy AccessKey=5></BUTTON><!--
+		--></DIV><!--
+		--><HR><!--
+		--><DIV Id=menu.themes Class=ITEM Role=menuitemcheckbox Title=Show&#x20;themes Aria-Checked=false Aria-HasPopup=true TabIndex=0><!--
+			--><DIV Id=menu.themes.popup Class=POPUP Role=menu Hidden><!--
+				--><DIV Class=ROW><!--
+					--><BUTTON Id=menu.themes.basic Class=ITEM Type=button Role=menuitemradio Title=Basic&#x20;theme Aria-Checked=true>1</BUTTON><!--
+					--><BUTTON Id=menu.themes.wine Class=ITEM Type=button Role=menuitemradio Title=Wine&#x20;theme Aria-Checked=false>2</BUTTON><!--
+					--><BUTTON Id=menu.themes.orange Class=ITEM Type=button Role=menuitemradio Title=Orange&#x20;theme Aria-Checked=false>3</BUTTON><!--
+					--><BUTTON Id=menu.themes.pink Class=ITEM Type=button Role=menuitemradio Title=Pink&#x20;theme Aria-Checked=false>4</BUTTON><!--
+					--><BUTTON Id=menu.themes.legendary Class=ITEM Type=button Role=menuitemradio Title=Legendary&#x20;theme Aria-Checked=false>5</BUTTON><!--
+					--><BUTTON Id=menu.themes.nleg Class=ITEM Type=button Role=menuitemradio Title=New&#x20;Legendary&#x20;theme Aria-Checked=false>6</BUTTON><!--
+					--><BUTTON Id=menu.themes.vampire Class=ITEM Type=button Role=menuitemradio Title=Vampire&#x20;theme Aria-Checked=false>7</BUTTON><!--
+				--></DIV><!--
+				--><DIV Class=ROW><!--
+					--><BUTTON Id=menu.themes.o Class=ITEM Type=button Role=menuitemradio Title=Old&#x20;Vampire&#x20;theme Aria-Checked=false>8</BUTTON><!--
+					--><BUTTON Id=menu.themes.digital Class=ITEM Type=button Role=menuitemradio Title=Digital&#x20;theme Aria-Checked=false>9</BUTTON><!--
+					--><BUTTON Id=menu.themes.modern Class=ITEM Type=button Role=menuitemradio Title=Modern&#x20;theme Aria-Checked=false>X</BUTTON><!--
+				--></DIV><!--
+			--></DIV><!--
+		--></DIV><!--
+		--><HR><!--
+		--><DIV Id=menu.audio Class=ITEM Role=menuitemcheckbox Title=Select&#x20;audio&#x20;track Aria-Checked=false Aria-HasPopup=true TabIndex=0><!--
+			--><DIV Id=menu.audio.popup Class=POPUP Role=menu Hidden><!--
+				--><DIV Class=ROW><!--
+					--><BUTTON Id=menu.audio.0 Class=ITEM Type=button Role=menuitemradio Title=No&#x20;audio Aria-Checked=true>0</BUTTON><!--
+					--><BUTTON Id=menu.audio.1 Class=ITEM Type=button Role=menuitemradio Title=MAAP&#x20;Excursion&#x20;One&#x0A;The&#x20;Lights&#x20;Galaxia&#x20;[CC&#x20;BY-NC-ND&#x20;3.0] Aria-Checked=true>1</BUTTON><!--
+					--><BUTTON Id=menu.audio.2 Class=ITEM Type=button Role=menuitemradio Title=Ghosts&#x20;I&#x0A;Nine&#x20;Inch&#x20;Nails&#x20;[CC&#x20;BY-NC-SA&#x20;3.0] Aria-Checked=true>2</BUTTON><!--
+					--><BUTTON Id=menu.audio.3 Class=ITEM Type=button Role=menuitemradio Title=Future,&#x20;and&#x20;It&#x20;Doesn&apos;t&#x20;Work&#x0A;Starscream&#x20;[CC&#x20;BY-NC-ND&#x20;3.0] Aria-Checked=true>3</BUTTON><!--
+					--><BUTTON Id=menu.audio.4 Class=ITEM Type=button Role=menuitemradio Title=rain.mp3&#x0A;[Public&#x20;domain] Aria-Checked=true>4</BUTTON><!--
+				--></DIV><!--
+			--></DIV><!--
+		--></DIV><!--
+		--><HR><!--
+		--><DIV Id=menu.io Role=group><!--
+			--><BUTTON Id=menu.io.clear Class=ITEM Type=button Title=Clear&#x20;document AccessKey=w></BUTTON><!--
+			--><LABEL Class=ITEM For=menu.io.upload Title=Upload TabIndex=0 AccessKey=o><INPUT Id=menu.io.upload Type=file Style=Display:None></LABEL><!--
+			--><A Id=menu.io.download Class=ITEM Role=menuitem Title=Download Download=My&#x20;Document.txt AccessKey=s></A><!--
+		--></DIV><!--
+	--></DIV>
 
 	<!--  Content  -->
-	<TEXTAREA id="content" autofocus style="font-family: sans-serif"></TEXTAREA>
+	<TEXTAREA Id=content AutoFocus Style=font-family:sans-serif></TEXTAREA>
 
 	<!--  Bottombar  -->
-	<ASIDE role="note">
-		<TIME id="datetime" title="Time unknown" datetime="00:00"><SPAN id="datetime-hours">??</SPAN><SPAN id="datetime-sep" style="opacity: 1;">:</SPAN><SPAN id="datetime-mins">??</SPAN><SPAN id="datetime-suffix"></SPAN></TIME><HR><SPAN id="wordcount">??? characters, ??? words</SPAN>
-	</ASIDE>
+	<ASIDE Id=meta Role=note Hidden><!--
+		--><TIME Id=meta.datetime Title=Time&#x20;unknown DateTime=00:00><!--
+			--><SPAN Id=meta.datetime.hours>??</SPAN><!--
+			--><SPAN Id=meta.datetime.separator Style=Opacity:1>:</SPAN><!--
+			--><SPAN Id=meta.datetime.minutes>??</SPAN><!--
+			--><SPAN Id=meta.datetime.suffix Hidden></SPAN><!--
+		--></TIME><!--
+		--><HR><!--
+		--><SPAN Id=meta.wordcount>??? characters, ??? words</SPAN><!--
+	--></ASIDE>
 
-	<!--  Footer content  -->
-	<FOOTER>
-		<A href="https://github.com/marrus-sh/writer/" target="_blank">KibiWriter 0.3.1</A> – 💾<BR>
-		<A href="" target="_blank" type="text/html" download="KibiWriter.html">Download this app</A>
-	</FOOTER>
+</DIV>
 
-	<!--  Application script  -->
-	<SCRIPT type="text/javascript">
-		void function () {
-			var ｙｅｓ = true
-			var ｎｏ = false
-			var ｇｅｔ = function (s) { return document . getElementById . call (document , s) }
-			var ｂｉｎｄ = function (f , t) { return arguments . length > 1 ? function (args) { return function () { return f . apply (t , args) } } (Array . prototype . slice . call (arguments , 2)) : function () { return f () } }
-               var ｃａｌｌ = function (f , t) { return arguments . length > 1 ? f . apply (t , Array . prototype . slice . call (arguments , 2)) : f () }
-			var theme_styler = ｇｅｔ ("style-selected")
-			var themes = [
-				ｇｅｔ ("style-basic") ,
-				ｇｅｔ ("style-wine") ,
-				ｇｅｔ ("style-orange") ,
-				ｇｅｔ ("style-pink") ,
-				ｇｅｔ ("style-legendary") ,
-				ｇｅｔ ("style-nleg") ,
-				ｇｅｔ ("style-vampire") ,
-			]
-			var font_buttons = [
-				ｇｅｔ ("font-sans") ,
-				ｇｅｔ ("font-serif") ,
-				ｇｅｔ ("font-cursive") ,
-				ｇｅｔ ("font-monospace") ,
-				ｇｅｔ ("font-fantasy") ,
-			]
-			var themer = ｇｅｔ ("theme-menu")
-			var theme_container = ｇｅｔ ("theme-container")
-			var theme_buttons = [
-				ｇｅｔ ("theme-basic") ,
-				ｇｅｔ ("theme-wine") ,
-				ｇｅｔ ("theme-orange") ,
-				ｇｅｔ ("theme-pink") ,
-				ｇｅｔ ("theme-legendary") ,
-				ｇｅｔ ("theme-nleg") ,
-				ｇｅｔ ("theme-vampire") ,
-			]
-			var clear = ｇｅｔ ("io-clear")
-			var upload = ｇｅｔ ("io-upload")
-			var download = ｇｅｔ ("io-download")
-			var content = ｇｅｔ ("content")
-			var wordcount = ｇｅｔ ("wordcount")
-			var datetime = ｇｅｔ ("datetime")
-			var hours = ｇｅｔ ("datetime-hours")
-			var sep = ｇｅｔ ("datetime-sep")
-			var minutes = ｇｅｔ ("datetime-mins")
-			var suffix = ｇｅｔ ("datetime-suffix")
-			var updateBackground = function () { content . style . backgroundPositionY = "-" + content . scrollTop + "px" }
-			var updateFont = function (index) {
-				content . style . fontFamily = font_buttons [index] . style . fontFamily
-				ｃａｌｌ (updateBackground)
-				for (var i = 0 ; i < font_buttons . length ; i++) {
-					var elt = font_buttons [i]
-					ｃａｌｌ (elt . setAttribute , elt , "aria-checked" , index === i ? "true" : "false")
-				}
-			}
-			var toggleThemeMenu = function (value) {
-				typeof value !== "boolean" ? value = !(ｃａｌｌ (themer . getAttribute , themer , "aria-checked") === "true") : void{}
-				themer . setAttribute . call (themer , "aria-checked" , value)
-				!value ? ｃａｌｌ (theme_container . setAttribute , theme_container , "hidden" , "") : ｃａｌｌ (theme_container . removeAttribute , theme_container , "hidden")
-			}
-			var toggle24Hour = function () { ｃａｌｌ (ｃａｌｌ (datetime . classList . contains , datetime . classList , '24h') ? datetime . classList . remove : datetime . classList . add , datetime . classList , '24h') }
-			var updateTheme = function (index) {
-				var theme = ｃａｌｌ (String . prototype . substr , theme_buttons [index] . id , 6)
-				for (var i = 0 ; i < themes . length ; i++) {
-					var style = themes [i]
-					var button = theme_buttons [i]
-					style . id === "style-" + theme ? theme_styler . textContent = style . textContent : void{}
-					ｃａｌｌ (button . setAttribute , button , "aria-checked" , index === i ? "true" : "false")
-				}
-			}
-			var updateInput = function () {
-				var text = content . value
-				download . href = "data:text/plain;charset=utf-8," + ｃａｌｌ (window . encodeURIComponent , window , text)
-				download . download = (ｃａｌｌ (String . prototype . substr , (ｃａｌｌ (String . prototype . match , text , /[^\n]+/) || [""]) [0] , 0 , 40) || "My Document") + ".txt"
-				text = ｃａｌｌ (String . prototype . replace , text , /[\uD800-\uDBFF][\uDC00-\uDFFF]/g , "�")
-				var characters = text . length
-				var words = (ｃａｌｌ (String . prototype . match , ｃａｌｌ (String . prototype . replace , ｃａｌｌ (String . prototype . replace , text , /[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/g , "") , /\u2014/g , " ") , /\S(?:\s+|$)/g) || []) . length
-				wordcount . textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words")
-			}
-			var updateTime = function () {
-				var hour24 = ｃａｌｌ (datetime . classList . contains , datetime . classList , '24h')
-				var now = new Date
-				var n
-				hours . textContent = hour24 ? (n = ｃａｌｌ (Date . prototype . getHours , now)) < 10 ? "0" + n : "" + n : !(n = ｃａｌｌ (Date.prototype.getHours , now) % 12) ? "12" : "" + n
-				sep . style . opacity = ｃａｌｌ (Date . prototype . getSeconds , now) % 2 ? "0" : "1"
-				minutes . textContent = (n = ｃａｌｌ (Date . prototype . getMinutes , now)) < 10 ? "0" + n : n
-				suffix . textContent = hour24 ? "" : ｃａｌｌ (Date . prototype . getHours , now) < 12 ? " AM" : " PM"
-				datetime . title = ｃａｌｌ (Date . prototype . toString , now)
-				datetime . datetime = ｃａｌｌ (Date . prototype . toISOString , now)
-				ｃａｌｌ (window.setTimeout , window , ｂｉｎｄ (window . requestAnimationFrame , window , updateTime) , 1000)
-			}
-			var scroll_waiting = ｎｏ
-			var input_waiting = ｎｏ
-			var i = 0
-			ｃａｌｌ (updateFont , null , 0)
-			ｃａｌｌ (updateTheme , null , 0)
-			ｃａｌｌ (updateInput)
-			ｃａｌｌ (updateTime)
-			ｃａｌｌ (content . addEventListener , content , "scroll" , function () {
-				scroll_waiting ? void{} : function () {
-					scroll_waiting = ｙｅｓ
-					ｃａｌｌ (window . requestAnimationFrame , window , function () {
-						ｃａｌｌ (updateBackground)
-						scroll_waiting = ｎｏ
-					})
-				} ()
-			})
-			for (i = 0 ; i < font_buttons . length ; i++) { void function (index) { ｃａｌｌ (font_buttons [i] . addEventListener , font_buttons [i] , "click" , ｂｉｎｄ (updateFont , null , index)) } (i) }
-			ｃａｌｌ (themer . addEventListener , themer , "click" , toggleThemeMenu)
-			ｃａｌｌ (datetime . addEventListener , datetime , "click" , toggle24Hour)
-			ｃａｌｌ (clear . addEventListener , clear , "click" , function () {
-				content . value = ''
-				ｃａｌｌ (updateInput)
-			})
-			for (i = 0 ; i < themes . length ; i++) { void function (index) { ｃａｌｌ (theme_buttons [i] . addEventListener , theme_buttons [i] , "click" , ｂｉｎｄ (updateTheme , null , index)) } (i) }
-			ｃａｌｌ (content . addEventListener , content , "input" , function () {
-				input_waiting ? void{} : function () {
-					input_waiting = ｙｅｓ
-					ｃａｌｌ (window . requestAnimationFrame , window , function () {
-						ｃａｌｌ (updateInput)
-						input_waiting = ｎｏ
-					})
-				} ()
-			})
-			ｃａｌｌ (content . addEventListener , content , "focus" , ｂｉｎｄ (toggleThemeMenu , null , ｎｏ))
-			ｃａｌｌ (upload . addEventListener , upload , "change" , function () {
-				var reader = new FileReader
-				ｃａｌｌ (reader . addEventListener , reader , "loadend" , function () {
-					content . value = reader . result
-					ｃａｌｌ (updateInput)
-				})
-				this . files && this . files [0] ? ｃａｌｌ (reader . readAsText , reader , this . files [0]) : void{}
-				this . value = null
-			})
-		} ()
-	</SCRIPT>
+<!--  Scripting  -->
+<SCRIPT>
+	void function () {
+		"use strict"
+		var window = this
 
-	<!--  EOF  -->
+		/*  Utility functions  */
+		function get () { return Doc$.getElementById.call(window.document , this) }
+		function bind (t) { return function (fn, args) { return function () { return fn.apply(t , args) } }.call(null , this , Arr$.slice.call(arguments , 1)) }
+
+		/*  Variables  */
+		var Arr$ = this.Array.prototype , Aud$ = typeof this.Audio === "function" ? this.Audio.prototype : null , Dat$ = this.Date.prototype , Doc$ = this.Document.prototype , Elt$ = this.Element.prototype , Str$ = this.String.prototype , audio = typeof this.Audio === "function" ? new this.Audio : null , audio_menu = get.call("menu.audio") , audio_popup = get.call("menu.audio.popup") , content = get.call("content") , datetime = get.call("meta.datetime") , download = get.call("menu.io.download") , fonts = ["sans" , "serif" , "cursive" , "monospace" , "fantasy"] , theme_menu = get.call("menu.themes") , theme_popup = get.call("menu.themes.popup") , theme_styler = get.call("style.selected") , themes = ["basic" , "wine" , "orange" , "pink" , "legendary" , "nleg" , "vampire", "o", "digital", "modern"] , track = -1 , tracklist = 0 , tracks = [null , ["https://archive.org/download/LUXXAr051402-01/01_-_The_Lights_Galaxia_-_E1_T4.mp3" , "https://archive.org/download/LUXXAr051402-01/02_-_The_Lights_Galaxia_-_E1_T1.mp3" , "https://archive.org/download/LUXXAr051402-01/03_-_The_Lights_Galaxia_-_E1_T2.mp3" , "https://archive.org/download/LUXXAr051402-01/04_-_The_Lights_Galaxia_-_E1_T5.mp3" , "https://archive.org/download/LUXXAr051402-01/05_-_The_Lights_Galaxia_-_E1_T3.mp3"] , ["https://archive.org/download/nineinchnails_ghosts_I_IV/01_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/02_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/03_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/04_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/05_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/06_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/07_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/08_Ghosts_I.mp3" , "https://archive.org/download/nineinchnails_ghosts_I_IV/09_Ghosts_I.mp3"] , ["https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_01_-_Rise_of_Space.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_02_-_Space_Party_Anthem.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_03_-_Gravity_in_Terms_of_Space-Time.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_04_-_Keplers_Star_Catalog.mp3" , "https://archive.org/download/Future_and_It_Doesnt_Work-4777/Starscream_-_05_-_Future_and_It_Doesnt_Work.mp3"] , ["./rain.mp3"]] , upload = get.call("menu.io.upload") , writer = get.call("writer")
+
+		/*  Element prototype shortcuts  */
+		var forget = Elt$.removeEventListener , getAttr = Elt$.getAttribute , listen = Elt$.addEventListener , rmvAttr = Elt$.removeAttribute , setAttr = Elt$.setAttribute
+
+		/*  Scripts  */
+		function updateBackground () { content.style.backgroundPositionY = "-" + content.scrollTop + "PX" }
+		function updateFont () {
+			var elt , i , index = this >>> 0
+			content.style.fontFamily = get.call("menu.fonts." + fonts[index]).style.fontFamily , updateBackground.call()
+			for (i = 0 ; i < fonts.length ; i++) { elt = get.call("menu.fonts." + fonts[i]) , setAttr.call(elt , "Aria-Checked" , index === i ? "true" : "false") }
+		}
+		function toggleAudioMenu () {
+			var value = typeof this !== "boolean" ? !(getAttr.call(audio_menu , "Aria-Checked") === "true") : this
+			setAttr.call(audio_menu , "Aria-Checked" , value) , (!value ? setAttr : rmvAttr).call(audio_popup , "Hidden" , "")
+		}
+		function toggleThemeMenu () {
+			var value = typeof this !== "boolean" ? !(getAttr.call(theme_menu , "Aria-Checked") === "true") : this
+			setAttr.call(theme_menu , "Aria-Checked" , value) , (!value ? setAttr : rmvAttr).call(theme_popup , "Hidden" , "")
+		}
+		function toggle24Hour () { typeof window.DOMTokenList === "function" && datetime.classList ? function () { (this.contains.call(datetime.classList, '24H') ? this.remove : this.add).call(datetime.classList , '24H') , updateTime.call(true) }.call(window.DOMTokenList.prototype) : void{} }
+		function updateTheme () {
+			var i , theme
+			theme_styler.textContent = get.call("style." + this).textContent
+			for (i = 0 ; i < themes.length ; i++) { theme = themes[i] , setAttr.call(get.call("menu.themes." + theme) , "Aria-Checked" , this === theme ? "true" : "false") }
+		}
+		function updateMeta () {
+			var characters , text = content.value , words
+			download.href = "data:text/plain;charset=utf-8," + window.encodeURIComponent.call(window , text) , download.download = (Str$.substr.call((Str$.match.call(text , /[^\n]+/) || [""])[0] , 0 , 40) || "My Document") + ".txt" , text = Str$.replace.call(text , /[\uD800-\uDBFF][\uDC00-\uDFFF]/g , "�") , characters = text.length , words = (Str$.match.call(Str$.replace.call(Str$.replace.call(text , /[\u0021-\u0040\u005B-\u0060\u007B-\u007E\u0080-\u00BF\u00D7\u00F7\u2000-\u2BFF\u2E00-\u2E7F]/g , "") , /\u2014/g, " ") , /\S(?:\s+|$)/g) || []).length , get.call("meta.wordcount").textContent = characters + (characters === 1 ? " character, " : " characters, ") + words + (words === 1 ? " word" : " words")
+		}
+		function updateTime () {
+			var hour24 = typeof window.DOMTokenList === "function" && datetime.classList ? window.DOMTokenList.prototype.contains.call(datetime.classList , "24H") : false , n , now = new window.Date
+			get.call("meta.datetime.hours").textContent = hour24 ? (n = Dat$.getHours.call(now)) < 10 ? "0" + n : "" + n : !(n = Dat$.getHours.call(now) % 12) ? "12" : "" + n , get.call("meta.datetime.separator").style.opacity = Dat$.getSeconds.call(now) % 2 ? "0" : "1" , get.call("meta.datetime.minutes").textContent = (n = Dat$.getMinutes.call(now)) < 10 ? "0" + n : n , void function () { this.textContent = hour24 ? "" : Dat$.getHours.call(now) < 12 ? " AM" : " PM" , (hour24 ? setAttr : rmvAttr).call(this , "Hidden", "") }.call(get.call("meta.datetime.suffix")) , datetime.title = Dat$.toString.call(now) , datetime.datetime = typeof Dat$.toISOString === "function" ? Dat$.toISOString.call(now) : Arr$.join.call([(n = Dat$.getHours.call(now)) < 10 ? "0" + n : "" + n , (n = Dat$.getMinutes.call(now)) < 10 ? "0" + n : n , (n = Dat$.getSeconds.call(now)) < 10 ? "0" + n : n], "-") , this === true ? void{} : window.setTimeout.call(window , bind.call(window.requestAnimationFrame , window , updateTime) , 1000)
+		}
+		function replay () {
+			var time = this.currentTime
+			function seekTo () { forget.call(this , "play" , seekTo , false) , time > this.currentTime ? this.currentTime = time : void{} , time <= this.currentTime ? forget.call(this , "playing" , seekTo , false) : void{} }
+			Aud$.load.call(this) , Aud$.play.call(this) , listen.call("play" , seekTo , false) , listen.call("playing" , seekTo , false)
+		}
+		function play () {
+			var playlist = tracks[tracklist]
+			track = playlist ? (track + 1) % playlist.length : -1
+			var next = playlist ? playlist[track] : null
+			!next ? Aud$.pause.call(this) : (this.src = next , Aud$.play.call(this))
+		}
+		function updateAudio () {
+			var button , i , index = this >>> 0
+			for (i = 0 ; i < tracks.length ; i++) { button = get.call("menu.audio." + i) , setAttr.call(button , "Aria-Checked" , index === i ? "true" : "false") }
+			audio && tracklist !== index ? (tracklist = index , track = -1 , play.call(audio)) : void{}
+		}
+		function initAndRun () {
+			var i, input_waiting = false , scroll_waiting = false
+			typeof window.initialize === "function" ? window.initialize.call(window) : void{} , updateFont.call(0) , updateTheme.call(themes[0]) , updateMeta.call() , updateTime.call(false) , updateAudio.call(0) , listen.call(content , "scroll" , function () { scroll_waiting ? void{} : function () { scroll_waiting = true , window.requestAnimationFrame.call(window , function () { updateBackground.call() , scroll_waiting = false }) }.call() } , false)
+			for (i = 0 ; i < fonts.length ; i++) { listen.call(get.call("menu.fonts." + fonts[i]) , "click" , bind.call(updateFont, i) , false) }
+			listen.call(audio_menu , "click" , toggleAudioMenu , false) , listen.call(theme_menu , "click" , toggleThemeMenu , false) , listen.call(datetime , "click" , toggle24Hour , false) , listen.call(get.call("menu.io.clear") , "click" , function () { content.value = "" , updateMeta.call() } , false)
+			for (i = 0 ; i < themes.length ; i++) { listen.call(get.call("menu.themes." + themes[i]) , "click" , bind.call(updateTheme , themes[i]) , false) }
+			audio ? function () {
+				for (i = 0 ; i < tracks.length ; i++) { listen.call(get.call("menu.audio." + i) , "click" , bind.call(updateAudio , i) , false) }
+				listen.call(audio , "stalled" , replay , false) , listen.call(audio , "error" , play , false) , listen.call(audio , "ended" , play , false )
+			}.call() : setAttr.call(audio_menu, "Hidden", "") , listen.call(content , "input" , function () { input_waiting ? void {} : function () { input_waiting = true , window.requestAnimationFrame.call(window, function () { updateMeta.call() , input_waiting = false }) }.call() } , false) , listen.call(content , "focus" , bind.call(toggleThemeMenu, false)) , typeof window.FileReader === "function" ? function () {
+				var Rdr$ = this.prototype , reader = new this
+				listen.call(upload , "change" , function () { reader.readyState !== Rdr$.LOADING ? (listen.call(reader , "loadend" , function () { content.value = reader.result , updateMeta.call() } , false) , this.files && this.files[0] ? Rdr$.readAsText.call(reader , this.files[0]) : void{}) : void{} , this.value = null } , false)
+			}.call(window.FileReader) : setAttr.call(upload , "Hidden" , "") , rmvAttr.call(get.call("menu"), "Hidden") , rmvAttr.call(get.call("meta"), "Hidden")
+		}
+
+		/*  Starting the script  */
+		initAndRun.call(null)
+	}.call(this)
+</SCRIPT>
+
+<!--  EOF  -->

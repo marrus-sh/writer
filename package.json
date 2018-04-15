@@ -1,0 +1,28 @@
+{
+  "name": "kibiwriter",
+  "version": "0.4.0",
+  "description": "A quick little text editor in HTML+CSS+JS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marrus-sh/writer.git"
+  },
+  "keywords": [
+    "writer",
+    "text editor",
+    "minimalist"
+  ],
+  "productName": "KibiWriter",
+  "author": "kibigo!",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/marrus-sh/writer/issues"
+  },
+  "homepage": "https://marrus-sh.github.io/writer/",
+  "devDependencies": {
+    "electron": "1.8.4"
+  }
+}
