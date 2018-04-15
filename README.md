@@ -1,6 +1,6 @@
 #  KibiWriter  #
 
->   Current version: _0.4.0_
+>   Current version: _0.5.0_
 
 A quick little text editor in HTML+CSS+JS
 
