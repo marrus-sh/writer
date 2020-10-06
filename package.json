@@ -23,6 +23,6 @@
   },
   "homepage": "https://marrus-sh.github.io/writer/",
   "devDependencies": {
-    "electron": "9.2.1"
+    "electron": "10.1.3"
   }
 }
