@@ -1,7 +1,7 @@
 #  KibiWriter  #
 
->   Current version: _0.5.0_
-
 A quick little text editor in HTML+CSS+JS
 
-<https://marrus-sh.github.io/writer/>
+> **Note:**
+> This repository is archived and out·of·date.
+> The latest version of KibiWriter is on GitHub at <https://github.com/marrus-sh/marrus-sh.github.io/tree/current/Apps/Writer/>.
